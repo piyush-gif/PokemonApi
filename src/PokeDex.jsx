@@ -1,6 +1,6 @@
 const PokeDex = () => {
   return ( 
-    <div>;aklsdjfas</div>
+    <div></div>
    );
 }
  
