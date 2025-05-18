@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 const NavBar = () => {
   return ( 
-    <nav class="navbar">
+    <nav className="navbar">
       <h1>pokemon world</h1>
-      <div>
+      <div className="links">
         <Link to="/">Home</Link>
         <Link to="/PokeDex">Pokedex</Link>
       </div>
