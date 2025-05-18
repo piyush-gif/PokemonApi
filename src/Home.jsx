@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 const Home = () => {
-  const [name, setName] = useState('');
+  
+  const url = 'https://pokeapi.co/api/v2/evolution-chain/';
+  const [name, setName] = useState('charmander');
   const [pokeData, setPokeData] = useState(null);
   const [error, setError] = useState(null);
+  const [evolve, setEvolve]=useState(null);
   const handleClick =() =>{
-    
     const trimmedName=name.trim().toLowerCase();
 
     if (trimmedName === ''){
@@ -25,6 +27,27 @@ const Home = () => {
       setPokeData(data);
     })
     .catch((err)=>{
+      setError(err.message);
+    })
+  }
+  const secondHandleClick = () => {
+    fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`,{  
+    }).then((res)=> {
+      if(!res.ok){
+        throw Error ("There's no futher evolution for this pokemon");
+      }
+      return res.json();
+    }).then((data) => {
+      const speciesUrl= data.evolution_chain.url;
+      
+      return fetch(speciesUrl)
+    }).then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setEvolve(data);
+    })
+    .catch((err) => {
       setError(err.message);
     })
   }
@@ -52,7 +75,24 @@ const Home = () => {
           />
         </div>
       )}
-      
+      {evolve && 
+      <div>
+        <h2>Evolution Chain</h2>
+        <ul>
+          <li>{evolve.chain.species.name}</li>
+          {evolve.chain.evolves_to.map((e1) => (
+            <li key={e1.species.name}>
+            {e1.species.name}
+            {e1.evolves_to.map((e2) => (
+            <ul key={e2.species.name}>
+              <li>→ {e2.species.name}</li>
+            </ul>
+          ))}
+        </li>
+      ))}
+    </ul>
+      </div>}
+      <button onClick={secondHandleClick}>Evolve?</button>
     </>
    );
 }
