@@ -25,3 +25,89 @@
 .navbar a:hover {
   color: #f1356d;
 }
+
+body {
+  background-color: #f9f9f9;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+.basic {
+  max-width: 600px;
+  margin: 1px auto;
+  text-align: center;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 60%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 15px 5px 0;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.poke-name, .evo {
+  max-width: 600px;
+  margin: 1px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.poke-name img {
+  width: 150px;
+  height: auto;
+  margin-top: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  margin: 5px 0;
+  font-weight: 500;
+}
+.evolve-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.evolve-btn button {
+  padding: 10px 25px;
+  background-color: #0077cc;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.evolve-btn button:hover {
+  background-color: #005fa3;
+}

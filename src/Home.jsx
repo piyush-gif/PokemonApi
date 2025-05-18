@@ -2,11 +2,11 @@ import { useState } from "react";
 
 const Home = () => {
   
-  const url = 'https://pokeapi.co/api/v2/evolution-chain/';
-  const [name, setName] = useState('charmander');
+  const [name, setName] = useState('');
   const [pokeData, setPokeData] = useState(null);
   const [error, setError] = useState(null);
   const [evolve, setEvolve]=useState(null);
+
   const handleClick =() =>{
     const trimmedName=name.trim().toLowerCase();
 
@@ -15,6 +15,7 @@ const Home = () => {
       setPokeData(null);
       return;
     }
+    setEvolve(null);
     setError(null);
     setPokeData(null);
     fetch(`https://pokeapi.co/api/v2/pokemon/${name}`,{
@@ -31,6 +32,7 @@ const Home = () => {
     })
   }
   const secondHandleClick = () => {
+    setError(null);
     fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`,{  
     }).then((res)=> {
       if(!res.ok){
@@ -53,8 +55,8 @@ const Home = () => {
   }
   return ( 
     <> 
+    <div className="basic">
       <p>Welcome</p>
-      <label></label>
       <p>Enter the name of the pokemon</p>
       <input 
       type="text" 
@@ -63,6 +65,7 @@ const Home = () => {
       onChange={(e) => setName(e.target.value)}></input>
 
       <button onClick={handleClick}>Enter</button>
+      </div>
       {error && 
         <p>{error}</p>
       }
@@ -76,7 +79,7 @@ const Home = () => {
         </div>
       )}
       {evolve && 
-      <div>
+      <div className="evo">
         <h2>Evolution Chain</h2>
         <ul>
           <li>{evolve.chain.species.name}</li>
@@ -87,12 +90,15 @@ const Home = () => {
             <ul key={e2.species.name}>
               <li>→ {e2.species.name}</li>
             </ul>
-          ))}
-        </li>
-      ))}
-    </ul>
+            ))}
+          </li>
+        ))}
+      </ul>
+      
       </div>}
-      <button onClick={secondHandleClick}>Evolve?</button>
+      <div className="evolve-btn">
+        <button onClick={secondHandleClick}>Evolve?</button>
+      </div>
     </>
    );
 }
