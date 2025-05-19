@@ -24,6 +24,8 @@ const useFetch =() =>{
       return res.json()
     }).then((data) => {
       setPokeData(data);
+      console.log("Pokemon data:", data);
+      console.log("Types:", data.types.map(t => t.type.name));
     })
     .catch((err)=>{
       setError(err.message);

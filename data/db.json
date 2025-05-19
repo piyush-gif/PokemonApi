@@ -1,0 +1,11 @@
+{
+  "pokemons": [
+    {
+      "name":"charmander",
+      "height":"6",
+      "weight":"85",
+      "Base experience":"62",
+      "type":"fire"
+    }
+  ]
+}
