@@ -111,3 +111,41 @@ ul li {
 .evolve-btn button:hover {
   background-color: #005fa3;
 }
+.pokedex-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.pokemon-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 15px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pokemon-card h3 {
+  color: #333;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+.pokemon-card p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/* Type badges */
+[class^="type-"] {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: white;
+  text-transform: capitalize;
+}
+
+.type-fire { background-color: #ee8130; }
+.type-electric { background-color: #f7d02c; }
+/* Add more types as needed */

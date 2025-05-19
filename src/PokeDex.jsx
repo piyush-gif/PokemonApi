@@ -32,6 +32,7 @@ const PokeDex = () => {
           <p>Height: {card.height}</p> 
           <p>Weight: {card.weight}</p> 
           <p>Base XP: {card.base_experience}</p>
+          <p>Type: <span className={`type-${card.type}`}>{card.type}</span></p>
         </div>
       ))}
     </div>

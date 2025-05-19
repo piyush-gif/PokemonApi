@@ -5,13 +5,13 @@
       "height":"6",
       "weight":"85",
       "base_experience":"62",
-      "type":"fire"
+      "type":["fire"]
     },{
       "name" : "pikachu",
       "height": "4",
       "weight": "60",
-      "base_exeprience": "112",
-      "type": "electric"
+      "base_experience": "112",
+      "type": ["electric"]
     }
   ]
 }
