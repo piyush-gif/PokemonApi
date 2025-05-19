@@ -1,64 +1,17 @@
-import { useState } from "react";
-
+import useFetch from "./useFetch";
+import useEvolution from "./useEvolution";
 const Home = () => {
+  const {
+    name,
+    setName,
+    pokeData,
+    error,
+    showDetails,
+    setShowDetails,
+    handleClick,
+  } = useFetch();
   
-  const [name, setName] = useState('charmander');
-  const [pokeData, setPokeData] = useState(null);
-  const [error, setError] = useState(null);
-  const [evolve, setEvolve]=useState(null);
-  const [showDetails, setShowDetails] = useState(false);
-
-  // const detailsClick = () = {
-
-  // }
-  const handleClick =() =>{
-    const trimmedName=name.trim().toLowerCase();
-
-    if (trimmedName === ''){
-      setError("Please enter a valid Pokemon name.")
-      setPokeData(null);
-      return;
-    }
-    setEvolve(null);
-    setError(null);
-    setPokeData(null);
-    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`,{
-    }).then((res) => {
-      if(!res.ok){
-        throw Error ('Count not fetch the data from that resource, Enter a valid Pokemon name');
-      }
-      return res.json()
-    }).then((data) => {
-      setPokeData(data);
-      console.log(data)
-    })
-    .catch((err)=>{
-      setError(err.message);
-    })
-  }
-  const secondHandleClick = () => {
-    setError(null);
-    fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`,{  
-    }).then((res)=> {
-      if(!res.ok){
-        throw Error ("There's no futher evolution for this pokemon");
-      }
-      return res.json();
-    }).then((data) => {
-      const speciesUrl= data.evolution_chain.url;
-      
-      return fetch(speciesUrl)
-    }).then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      setEvolve(data);
-    })
-    .catch((err) => {
-      setError(err.message);
-    })
-  }
-
+  const { evolve, evoError, fetchEvo } = useEvolution();
   
   return ( 
     <> 
@@ -72,10 +25,10 @@ const Home = () => {
       onChange={(e) => setName(e.target.value)}></input>
 
       <button onClick={handleClick}>Enter</button>
+      <button onClick={() => fetchEvo(name)}>Evolve?</button>
       </div>
-      {error && 
-        <p>{error}</p>
-      }
+      {error && <p>{error}</p>}
+      {evoError && <p>{evoError}</p>}
       {pokeData && (
         <div className="poke-name">
           <h2>{pokeData.name}</h2>
@@ -92,8 +45,6 @@ const Home = () => {
                 <p>Base experience: {pokeData.base_experience}</p>
               </div>
             )}
-          
-          
         </div>
       )}
       
@@ -113,11 +64,8 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      
       </div>}
-      <div className="evolve-btn">
-        <button onClick={secondHandleClick}>Evolve?</button>
-      </div>
+      
     </>
    );
 }
