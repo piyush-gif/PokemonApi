@@ -2,11 +2,15 @@ import { useState } from "react";
 
 const Home = () => {
   
-  const [name, setName] = useState('');
+  const [name, setName] = useState('charmander');
   const [pokeData, setPokeData] = useState(null);
   const [error, setError] = useState(null);
   const [evolve, setEvolve]=useState(null);
+  const [showDetails, setShowDetails] = useState(false);
 
+  // const detailsClick = () = {
+
+  // }
   const handleClick =() =>{
     const trimmedName=name.trim().toLowerCase();
 
@@ -26,6 +30,7 @@ const Home = () => {
       return res.json()
     }).then((data) => {
       setPokeData(data);
+      console.log(data)
     })
     .catch((err)=>{
       setError(err.message);
@@ -53,6 +58,8 @@ const Home = () => {
       setError(err.message);
     })
   }
+
+  
   return ( 
     <> 
     <div className="basic">
@@ -74,10 +81,22 @@ const Home = () => {
           <h2>{pokeData.name}</h2>
           <img
             src={pokeData.sprites.front_default}
-            alt={pokeData.name}
-          />
+            alt={pokeData.name}/>
+          <button onClick={() => setShowDetails(!showDetails)}>
+             {showDetails ? "Hide Details" : "Show Details"}
+             </button>
+            {showDetails && (
+              <div>
+                <p>Height: {pokeData.height}</p>
+                <p>Weight: {pokeData.weight}</p>
+                <p>Base experience: {pokeData.base_experience}</p>
+              </div>
+            )}
+          
+          
         </div>
       )}
+      
       {evolve && 
       <div className="evo">
         <h2>Evolution Chain</h2>
