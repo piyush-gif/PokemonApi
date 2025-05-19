@@ -4,8 +4,14 @@
       "name":"charmander",
       "height":"6",
       "weight":"85",
-      "Base experience":"62",
+      "base_experience":"62",
       "type":"fire"
+    },{
+      "name" : "pikachu",
+      "height": "4",
+      "weight": "60",
+      "base_exeprience": "112",
+      "type": "electric"
     }
   ]
 }

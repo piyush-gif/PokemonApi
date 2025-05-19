@@ -10,7 +10,6 @@ const Home = () => {
     setShowDetails,
     handleClick,
   } = useFetch();
-  
   const { evolve, evoError, fetchEvo } = useEvolution();
   
   return ( 
