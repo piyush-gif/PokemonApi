@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const useFetch =() =>{
-    const [name, setName] = useState('charmander');
+    const [name, setName] = useState('bulbasaur');
     const [pokeData, setPokeData] = useState(null);
     const [error, setError] = useState(null);
     const [showDetails, setShowDetails] = useState(false);

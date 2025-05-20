@@ -66,7 +66,7 @@ const Home = () => {
                 <p>Height: {pokeData.height}</p>
                 <p>Weight: {pokeData.weight}</p>
                 <p>Base experience: {pokeData.base_experience}</p>
-                <p>Type: {pokeData.types.map((t) => t.type.name)}</p>
+                <p>Type: {pokeData.types.map((t) => (`${t.type.name} `))}</p>
               </div>
             )}
         </div>

@@ -9,6 +9,48 @@
       "type": [
         "fire"
       ]
+    },
+    {
+      "id": "761a",
+      "name": "bulbasaur",
+      "height": 7,
+      "weight": 69,
+      "base_experience": 64,
+      "type": [
+        "grass",
+        "poison"
+      ]
+    },
+    {
+      "id": "ee8c",
+      "name": "venusaur",
+      "height": 20,
+      "weight": 1000,
+      "base_experience": 263,
+      "type": [
+        "grass",
+        "poison"
+      ]
+    },
+    {
+      "id": "8a0d",
+      "name": "blastoise",
+      "height": 16,
+      "weight": 855,
+      "base_experience": 265,
+      "type": [
+        "water"
+      ]
+    },
+    {
+      "id": "4202",
+      "name": "metapod",
+      "height": 7,
+      "weight": 99,
+      "base_experience": 72,
+      "type": [
+        "bug"
+      ]
     }
   ]
 }
