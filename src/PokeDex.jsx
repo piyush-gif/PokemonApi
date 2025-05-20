@@ -46,6 +46,7 @@ const PokeDex = () => {
       {cards.map((card) => (
         <div className="pokemon-card" key={card.id || card.name}>
           <h3>{card.name}</h3>
+          <img src={card.img} alt={card.name}/>
           <p>Height: {card.height}</p> 
           <p>Weight: {card.weight}</p> 
           <p>Base XP: {card.base_experience}</p>

@@ -1,17 +1,7 @@
 {
   "pokemons": [
     {
-      "id": "1866",
-      "name": "charmander",
-      "height": 6,
-      "weight": 85,
-      "base_experience": 62,
-      "type": [
-        "fire"
-      ]
-    },
-    {
-      "id": "761a",
+      "id": "c920",
       "name": "bulbasaur",
       "height": 7,
       "weight": 69,
@@ -19,38 +9,19 @@
       "type": [
         "grass",
         "poison"
-      ]
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
     },
     {
-      "id": "ee8c",
-      "name": "venusaur",
-      "height": 20,
-      "weight": 1000,
-      "base_experience": 263,
+      "id": "fcea",
+      "name": "pikachu",
+      "height": 4,
+      "weight": 60,
+      "base_experience": 112,
       "type": [
-        "grass",
-        "poison"
-      ]
-    },
-    {
-      "id": "8a0d",
-      "name": "blastoise",
-      "height": 16,
-      "weight": 855,
-      "base_experience": 265,
-      "type": [
-        "water"
-      ]
-    },
-    {
-      "id": "4202",
-      "name": "metapod",
-      "height": 7,
-      "weight": 99,
-      "base_experience": 72,
-      "type": [
-        "bug"
-      ]
+        "electric"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
     }
   ]
 }

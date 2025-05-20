@@ -18,7 +18,8 @@ const Home = () => {
       height: pokeData.height,
       weight: pokeData.weight,
       base_experience: pokeData.base_experience,
-      type: pokeData.types.map(t => t.type.name)
+      type: pokeData.types.map(t => t.type.name),
+      img: pokeData.sprites.front_default
     }
     fetch('http://localhost:8000/pokemons',{
       method:'POST',
