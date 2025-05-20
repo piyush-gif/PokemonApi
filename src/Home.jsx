@@ -11,7 +11,30 @@ const Home = () => {
     handleClick,
   } = useFetch();
   const { evolve, evoError, fetchEvo } = useEvolution();
-  
+  const saveHandle= () => { 
+    if(!pokeData) return ;
+    const pokemonData={
+      name:pokeData.name,
+      height: pokeData.height,
+      weight: pokeData.weight,
+      base_experience: pokeData.base_experience,
+      type: pokeData.types.map(t => t.type.name)
+    }
+    fetch('http://localhost:8000/pokemons',{
+      method:'POST',
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify(pokemonData),
+
+    })
+    .then((res) => {
+      if(!res.ok) throw Error ("could not save the pokemon");
+      return res.json();
+    })
+    .then((data) => alert(`Saved ${data.name}`))
+    .catch((err) => console.error(err.message));
+  };
   return ( 
     <> 
     <div className="basic">
@@ -25,6 +48,7 @@ const Home = () => {
 
       <button onClick={handleClick}>Enter</button>
       <button onClick={() => fetchEvo(name)}>Evolve?</button>
+      <button onClick={saveHandle}>Save</button>
       </div>
       {error && <p>{error}</p>}
       {evoError && <p>{evoError}</p>}
