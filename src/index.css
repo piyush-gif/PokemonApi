@@ -2,52 +2,69 @@
 
 * {
   margin: 0;
-  font-family: "Quicksand";
-}
-.navbar {
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-  border-bottom: 1px solid #f2f2f2;
-  background-color: rgb(6, 6, 46);
-  color:yellow;
-}
-.navbar .links {
-  margin-left: auto;
-}
-.navbar a {
-  margin-left: 16px;
-  text-decoration: none;
-  padding: 6px;
-}
-.navbar a:hover {
-  color: #f1356d;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
 }
 
 body {
   background-color: #f9f9f9;
   padding: 20px;
   line-height: 1.6;
+  color: #333;
 }
 
+/* Navbar */
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  border-bottom: 1px solid #f2f2f2;
+  background-color: rgb(6, 6, 46);
+  color: yellow;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: yellow;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #f1356d;
+  color: white;
+}
+
+/* Main Container */
 .basic {
   max-width: 600px;
-  margin: 1px auto;
+  margin: 20px auto;
   text-align: center;
-  padding: 20px;
+  padding: 25px;
   background: white;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* Input + Button */
 input[type="text"] {
-  padding: 10px;
-  width: 60%;
+  padding: 12px;
+  width: 65%;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 6px;
   margin-top: 10px;
+  font-size: 16px;
 }
 
 button {
@@ -57,22 +74,25 @@ button {
   border: none;
   color: white;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
-.poke-name, .evo {
+/* Pokémon Info + Evolution */
+.poke-name,
+.evo {
   max-width: 600px;
-  margin: 1px auto;
+  margin: 20px auto;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 25px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .poke-name img {
@@ -81,15 +101,18 @@ button:hover {
   margin-top: 10px;
 }
 
+/* Lists */
 ul {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 ul li {
-  margin: 5px 0;
+  margin: 8px 0;
   font-weight: 500;
 }
+
+/* Evolution Button */
 .evolve-btn {
   display: flex;
   justify-content: center;
@@ -105,47 +128,63 @@ ul li {
   border-radius: 6px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .evolve-btn button:hover {
   background-color: #005fa3;
+  transform: translateY(-2px);
 }
+
+/* Grid Container */
 .pokedex-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
   padding: 20px;
 }
 
+/* Pokémon Card */
 .pokemon-card {
   border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 15px;
+  border-radius: 12px;
+  padding: 20px;
   background: white;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .pokemon-card h3 {
   color: #333;
-  margin-top: 0;
+  margin-top: 10px;
   text-transform: capitalize;
 }
 
 .pokemon-card p {
   margin: 5px 0;
   color: #666;
+  font-size: 14px;
 }
 
-/* Type badges */
+/* Type Badges */
 [class^="type-"] {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
+  padding: 4px 10px;
+  border-radius: 5px;
   color: white;
   text-transform: capitalize;
+  margin: 5px 3px;
+  font-size: 13px;
+  font-weight: 600;
 }
 
+/* Type Colors */
 .type-normal    { background-color: #A8A77A; }
 .type-fire      { background-color: #EE8130; }
 .type-water     { background-color: #6390F0; }
