@@ -1,5 +1,5 @@
 import useFetch from "./useFetch";
-import useEvolution from "./useEvolution";
+
 const Home = () => {
   const {
     name,
@@ -8,9 +8,9 @@ const Home = () => {
     error,
     showDetails,
     setShowDetails,
-    handleClick,
+    handleClick,evolve, evoError
   } = useFetch();
-  const { evolve, evoError, fetchEvo } = useEvolution();
+ 
   const saveHandle= () => { 
     if(!pokeData) return ;
     const pokemonData={
@@ -48,7 +48,6 @@ const Home = () => {
       onChange={(e) => setName(e.target.value)}></input>
 
       <button onClick={handleClick}>Enter</button>
-      <button onClick={() => fetchEvo(name)}>Evolve?</button>
       <button onClick={saveHandle}>Save</button>
       </div>
       {error && <p>{error}</p>}

@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 const useFetch =() =>{
-    const [name, setName] = useState('bulbasaur');
+    const [name, setName] = useState('bulbasaur'); // 
     const [pokeData, setPokeData] = useState(null);
     const [error, setError] = useState(null);
     const [showDetails, setShowDetails] = useState(false);
+    const [evolve, setEvolve]=useState(null);
+    const [evoError, setEvoError] = useState(null);
   const handleClick = () =>{
     const trimmedName = name.trim().toLowerCase();
 
@@ -13,6 +15,8 @@ const useFetch =() =>{
       setPokeData(null);
       return;
     }
+    setEvoError(null);
+    setEvolve(null);
     setError(null);
     setPokeData(null);
     setShowDetails(false);
@@ -24,16 +28,27 @@ const useFetch =() =>{
       return res.json()
     }).then((data) => {
       setPokeData(data);
-      console.log("Pokemon data:", data);
-      console.log("Types:", data.types.map(t => t.type.name));
+      return fetch(`https://pokeapi.co/api/v2/pokemon-species/${trimmedName}`)
     })
-    .catch((err)=>{
-      setError(err.message);
+    .then((res) => {
+      if (!res.ok) throw Error("Could not fetch species data.");
+      return res.json();
     })
-
-   
-  }
-   return {name, setName, pokeData, error, showDetails, setShowDetails, handleClick}
+    .then((speciesData) => {
+      return fetch(speciesData.evolution_chain.url);
+    })
+    .then((res) => {
+      if (!res.ok) throw Error("Could not fetch evolution chain.");
+      return res.json();
+    })
+    .then((evolutionData) => {
+      setEvolve(evolutionData);
+    })
+    .catch((err) => {
+      setEvoError(err.message);
+    });
+};
+   return {name, setName, pokeData, error, showDetails, setShowDetails, handleClick, evolve, evoError}
 }
     
 
