@@ -24,18 +24,6 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
     },
     {
-      "id": "1ab6",
-      "name": "bulbasaur",
-      "height": 7,
-      "weight": 69,
-      "base_experience": 64,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-    },
-    {
       "id": "c33e",
       "name": "mewtwo",
       "height": 20,
@@ -45,6 +33,17 @@
         "psychic"
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
+    },
+    {
+      "id": "58e4",
+      "name": "raichu",
+      "height": 8,
+      "weight": 300,
+      "base_experience": 243,
+      "type": [
+        "electric"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
     }
   ]
 }

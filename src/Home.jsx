@@ -1,5 +1,4 @@
 import useFetch from "./useFetch";
-
 const Home = () => {
   const {
     name,
@@ -10,7 +9,7 @@ const Home = () => {
     setShowDetails,
     handleClick,evolve, evoError
   } = useFetch();
- 
+  
   const saveHandle= () => { 
     if(!pokeData) return ;
     const pokemonData={
@@ -89,7 +88,6 @@ const Home = () => {
         ))}
       </ul>
       </div>}
-      
     </>
    );
 }
