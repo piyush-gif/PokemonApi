@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
-
+import { useDispatch } from 'react-redux';
+import { setTotalItems } from './pokedexSlice';
 const PokeDex = () => {
   const [error, setError] = useState(null);
   const [cards, setCard] = useState([]);
@@ -7,19 +8,23 @@ const PokeDex = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const limit = 2;
+  const dispatch = useDispatch();
   useEffect(()=> {
-    setLoading(true);
+   
+
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
     .then((res) => {
       if(!res.ok) {
         throw new Error('Failed to fetch the data');
       }
       const totalItems = res.headers.get('X-Total-Count');
-        
-      if(totalItems) {
-          setTotalPages(Math.ceil(totalItems / limit));
-        }
-      console.log(totalItems)
+      
+
+      if (totalItems) {
+        setTotalPages(Math.ceil(totalItems / limit));
+        dispatch(setTotalItems(Number(totalItems))); // <-- this line updates Redux store
+      }
+      setLoading(true);
       return res.json();
     })
     .then((data) => {
@@ -30,6 +35,8 @@ const PokeDex = () => {
       setError(err.message);
       setLoading(false);
     })
+
+    
   },[page])
   
 
