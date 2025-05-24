@@ -1,0 +1,31 @@
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  border-bottom: 1px solid #f2f2f2;
+  background-color: rgb(6, 6, 46); /* dark blue */
+  color: yellow;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: yellow;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+  background-color: #f1356d; /* pinkish hover */
+  color: white;
+}
