@@ -6,7 +6,7 @@ const PokeDex = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
-  const limit = 5;
+  const limit = 2;
   useEffect(()=> {
     setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
@@ -19,7 +19,7 @@ const PokeDex = () => {
       if(totalItems) {
           setTotalPages(Math.ceil(totalItems / limit));
         }
-      
+      console.log(totalItems)
       return res.json();
     })
     .then((data) => {
@@ -77,7 +77,7 @@ const PokeDex = () => {
       {/* Pagination Controls */}
       <div className="pagination-controls">
         <button onClick={() => setPage((p) => Math.max(p - 1, 1))} disabled={page === 1}>
-          ⬅ Previous
+          ⬅
         </button>
         <span>
           Page {page}
@@ -87,7 +87,7 @@ const PokeDex = () => {
           onClick={() => setPage((p) => p + 1)}
           disabled={totalPages !== null && page >= totalPages}
         >
-          Next ➡
+          ➡
         </button>
       </div>
     </div>

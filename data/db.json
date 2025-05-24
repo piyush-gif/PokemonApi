@@ -1,7 +1,7 @@
 {
   "pokemons": [
     {
-      "id": "f0e9",
+      "id": "1",
       "name": "pikachu",
       "height": 4,
       "weight": 60,
@@ -12,7 +12,7 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
     },
     {
-      "id": "09f8",
+      "id": "2",
       "name": "venusaur",
       "height": 20,
       "weight": 1000,
@@ -24,7 +24,7 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
     },
     {
-      "id": "c33e",
+      "id": "3",
       "name": "mewtwo",
       "height": 20,
       "weight": 1220,
@@ -35,7 +35,7 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
     },
     {
-      "id": "58e4",
+      "id": "4",
       "name": "raichu",
       "height": 8,
       "weight": 300,
