@@ -1,4 +1,4 @@
-// src/store/pokedexSlice.js
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const pokedexSlice = createSlice({

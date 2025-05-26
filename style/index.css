@@ -7,11 +7,21 @@
   font-family: 'Quicksand', sans-serif;
 }
 
-body {
-  background-color: #f9f9f9;
+.app {
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
   padding: 20px;
   line-height: 1.6;
+}
+
+.app.light {
+  background-color: #f9f9f9;
   color: #333;
+}
+
+.app.dark {
+  background-color: #121212;
+  color: #f5f5f5;
 }
 
 ul {
@@ -22,5 +32,5 @@ ul {
 ul li {
   margin: 8px 0;
   font-weight: 500;
-  color: #555;
+  color: inherit; /* Inherit text color from parent theme */
 }
