@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { setTotalItems } from './pokedexSlice';
+import { setTotalItems } from './pokedexSlice.js';
+import { openPopup, fetchPokemonDetails } from './popupSlice.js';
 const PokeDex = () => {
   const [error, setError] = useState(null);
   const [cards, setCard] = useState([]);
@@ -62,7 +63,14 @@ const PokeDex = () => {
     <div className="pokedex-wrapper">
       <div className="pokedex-container">
         {cards.map((card) => (
-          <div className="pokemon-card" key={card.id || card.name}>
+          <div
+            className="pokemon-card"
+            key={card.id || card.name}
+            onClick={() => {
+              dispatch(fetchPokemonDetails(card.id));
+              dispatch(openPopup());
+            }}
+          >
             <h3>{card.name}</h3>
             <img src={card.img} alt={card.name} />
             <p>
@@ -74,8 +82,16 @@ const PokeDex = () => {
                 </span>
               ))}
             </p>
-            <button onClick={() => handleDelete(card.id)}>delete</button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // prevent triggering the popup
+                handleDelete(card.id);
+              }}
+            >
+              delete
+            </button>
           </div>
+
         ))}
       </div>
 

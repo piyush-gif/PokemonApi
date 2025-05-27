@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import PokeDex from './PokeDex';
 import { useSelector } from 'react-redux';
+import Popup from './popup';
 
 function App() {
   const mode = useSelector((state) => state.theme.mode); 
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Pokedex" element={<PokeDex />} />
         </Routes>
+        <Popup /> 
       </Router>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setTheme } from './themeSlice'; // update the path if necessary
+import { setTheme } from './themeSlice.js';// update the path if necessary
 
 const NavBar = () => {
   const totalItems = useSelector((state) => state.pokedex.totalItems);
