@@ -9,9 +9,10 @@
 
 .app {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  padding: 20px;
-  line-height: 1.6;
+  background-image: url('/images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .app.light {
