@@ -8,7 +8,8 @@ const PokeDex = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
-  const [info, setInfo] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+
   const limit = 5;
   const dispatch = useDispatch();
   useEffect(()=> {
@@ -59,10 +60,22 @@ const PokeDex = () => {
   };
    if (loading) return <div>Loading Pokémon...</div>;
    if (error) return <div>Error: {error}</div>;
+  const filteredCards = cards.filter((card) =>
+  card.name.toLowerCase().includes(searchTerm)
+  );
  return (
-    <div className="pokedex-wrapper">
+   <div className="pokedex-wrapper">
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search Pokémon by name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
+        />
+      </div>
+
       <div className="pokedex-container">
-        {cards.map((card) => (
+        {filteredCards.map((card) => (
           <div
             className="pokemon-card"
             key={card.id || card.name}
@@ -84,14 +97,13 @@ const PokeDex = () => {
             </p>
             <button
               onClick={(e) => {
-                e.stopPropagation(); // prevent triggering the popup
+                e.stopPropagation();
                 handleDelete(card.id);
               }}
             >
               delete
             </button>
           </div>
-
         ))}
       </div>
 
@@ -112,7 +124,7 @@ const PokeDex = () => {
         </button>
       </div>
     </div>
-  );
+    );
 };
 
  

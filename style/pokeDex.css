@@ -17,9 +17,7 @@
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
-.pokemon-car:active{
-  
-}
+
 .pokemon-card img{
   width:100px;
 }
@@ -56,3 +54,17 @@
 .type-dark      { background-color: #705746; }
 .type-steel     { background-color: #B7B7CE; }
 .type-fairy     { background-color: #D685AD; }
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.search-bar input {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 80%;
+  max-width: 400px;
+}
