@@ -1,0 +1,71 @@
+/* Popup.css */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Make sure it's above all other elements */
+}
+
+.popup-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: slideUp 0.3s ease-out;
+}
+
+.popup-card img {
+  max-width: 150px;
+  height: auto;
+  margin: 1rem 0;
+}
+
+.popup-card h2 {
+  margin: 0.5rem 0;
+  text-transform: capitalize;
+}
+
+.popup-card p {
+  margin: 0.25rem 0;
+}
+
+.popup-card button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popup-card button:hover {
+  background-color: #e84118;
+}
+
+/* Pokémon type styling */
+.popup-card .type-fire { background: #f08030; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
+.popup-card .type-water { background: #6890f0; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
+.popup-card .type-grass { background: #78c850; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
+/* Add more types as needed... */
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
