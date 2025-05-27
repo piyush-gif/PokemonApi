@@ -7,7 +7,8 @@ const PokeDex = () => {
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
-  const limit = 2;
+  const [info, setInfo] = useState(null);
+  const limit = 5;
   const dispatch = useDispatch();
   useEffect(()=> {
    
@@ -64,9 +65,6 @@ const PokeDex = () => {
           <div className="pokemon-card" key={card.id || card.name}>
             <h3>{card.name}</h3>
             <img src={card.img} alt={card.name} />
-            <p>Height: {card.height}</p>
-            <p>Weight: {card.weight}</p>
-            <p>Base XP: {card.base_experience}</p>
             <p>
               Type:
               {card.type.map((t) => (

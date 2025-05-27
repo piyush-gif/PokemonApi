@@ -5,10 +5,10 @@ import PokeDex from './PokeDex';
 import { useSelector } from 'react-redux';
 
 function App() {
-  const mode = useSelector((state) => state.theme.mode); // "light" or "dark"
+  const mode = useSelector((state) => state.theme.mode); 
 
   return (
-    <div className={`app ${mode}`}> {/* This is where the class is applied */}
+    <div className={`app ${mode}`}> 
       <Router>
         <NavBar />
         <Routes>
