@@ -141,6 +141,9 @@ const PokeDex = () => {
           ➡
         </button>
       </div>
+      <div className="footer">
+      <p>© 2025 Piyush Khadka.</p>
+    </div>
     </div>
   );
 };

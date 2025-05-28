@@ -1,4 +1,6 @@
 import useFetch from "./useFetch";
+import React from "react";
+
 const Home = () => {
   const {
     name,
@@ -36,9 +38,10 @@ const Home = () => {
     .catch((err) => console.error(err.message));
   };
   return ( 
-    <> 
-    <div className="basic">
-      <p>Welcome</p>
+    <div className="main"> 
+    <div className="intro">
+      <h1>Welcome</h1>
+      <h2>to Pokemon World</h2>
       <p>Enter the name of the pokemon</p>
       <input 
       type="text" 
@@ -49,22 +52,19 @@ const Home = () => {
       <button onClick={handleClick}>Enter</button>
       <button onClick={saveHandle}>Save</button>
       </div>
-      {error && <p>{error}</p>}
-      {evoError && <p>{evoError}</p>}
+      <div className="errors">
+        {error && <p>{error}</p>}
+        {evoError && <p>{evoError}</p>}
+      </div>
       {pokeData && (
         <div className="poke-name">
-          <h2>{pokeData.name}</h2>
+          <h3>{pokeData.name}</h3>
           <img
             src={pokeData.sprites.front_default}
             alt={pokeData.name}/>
-          <button onClick={() => setShowDetails(!showDetails)}>
-             {showDetails ? "Hide Details" : "Show Details"}
-             </button>
+            <br></br>
             {showDetails && (
               <div>
-                <p>Height: {pokeData.height}</p>
-                <p>Weight: {pokeData.weight}</p>
-                <p>Base experience: {pokeData.base_experience}</p>
                 <p>Type: {pokeData.types.map((t) => (`${t.type.name} `))}</p>
               </div>
             )}
@@ -77,18 +77,22 @@ const Home = () => {
         <ul>
           <li>{evolve.chain.species.name}</li>
           {evolve.chain.evolves_to.map((e1) => (
-            <li key={e1.species.name}>
-            {e1.species.name}
+            <React.Fragment key={e1.species.name}>
+           <li>{e1.species.name}</li>
             {e1.evolves_to.map((e2) => (
-            <ul key={e2.species.name}>
-              <li>→ {e2.species.name}</li>
-            </ul>
+            <li key={e2.species.name}>
+               {e2.species.name}
+            </li>
             ))}
-          </li>
+          </React.Fragment>
         ))}
-      </ul>
+       </ul>
       </div>}
-    </>
+
+    <div className="footer">
+      <p>© 2025 Piyush Khadka.</p>
+    </div>
+    </div>
    );
 }
  

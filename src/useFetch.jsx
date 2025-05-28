@@ -4,7 +4,7 @@ const useFetch =() =>{
     const [name, setName] = useState('bulbasaur'); // 
     const [pokeData, setPokeData] = useState(null);
     const [error, setError] = useState(null);
-    const [showDetails, setShowDetails] = useState(false);
+    const [showDetails, setShowDetails] = useState(true);
     const [evolve, setEvolve]=useState(null);
     const [evoError, setEvoError] = useState(null);
   const handleClick = () =>{
@@ -19,7 +19,6 @@ const useFetch =() =>{
     setEvolve(null);
     setError(null);
     setPokeData(null);
-    setShowDetails(false);
     fetch(`https://pokeapi.co/api/v2/pokemon/${trimmedName}`,{
     }).then((res) => {
       if(!res.ok){

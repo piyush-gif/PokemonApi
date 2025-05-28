@@ -136,6 +136,17 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
       "id": "8oNLRJT"
+    },
+    {
+      "name": "eevee",
+      "height": 3,
+      "weight": 65,
+      "base_experience": 65,
+      "type": [
+        "normal"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png",
+      "id": "M4fU-60"
     }
   ]
 }
