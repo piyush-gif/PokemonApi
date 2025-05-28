@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { setTotalItems } from './pokedexSlice.js';
 import { openPopup, fetchPokemonDetails } from './popupSlice.js';
 const PokeDex = () => {
@@ -10,7 +10,7 @@ const PokeDex = () => {
   const [totalPages, setTotalPages] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const limit = 5;
+  const limit = 10;
   const dispatch = useDispatch();
   useEffect(()=> {
    
@@ -25,7 +25,7 @@ const PokeDex = () => {
 
       if (totalItems) {
         setTotalPages(Math.ceil(totalItems / limit));
-        dispatch(setTotalItems(Number(totalItems))); // <-- this line updates Redux store
+        dispatch(setTotalItems(Number(totalItems))); 
       }
       setLoading(true);
       return res.json();
@@ -95,6 +95,7 @@ const PokeDex = () => {
                 </span>
               ))}
             </p>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();

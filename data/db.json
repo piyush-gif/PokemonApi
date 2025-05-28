@@ -24,17 +24,6 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
     },
     {
-      "id": "3",
-      "name": "mewtwo",
-      "height": 20,
-      "weight": 1220,
-      "base_experience": 340,
-      "type": [
-        "psychic"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png"
-    },
-    {
       "id": "4",
       "name": "raichu",
       "height": 8,
@@ -68,6 +57,96 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
       "id": "U-ysrz1"
+    },
+    {
+      "name": "eevee",
+      "height": 3,
+      "weight": 65,
+      "base_experience": 65,
+      "type": [
+        "normal"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png",
+      "id": "TyA75HK"
+    },
+    {
+      "name": "leafeon",
+      "height": 10,
+      "weight": 255,
+      "base_experience": 184,
+      "type": [
+        "grass"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/470.png",
+      "id": "o7esxyC"
+    },
+    {
+      "name": "gloom",
+      "height": 8,
+      "weight": 86,
+      "base_experience": 138,
+      "type": [
+        "grass",
+        "poison"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
+      "id": "b9bUM_d"
+    },
+    {
+      "name": "psyduck",
+      "height": 8,
+      "weight": 196,
+      "base_experience": 64,
+      "type": [
+        "water"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
+      "id": "zOeOLnP"
+    },
+    {
+      "name": "poliwag",
+      "height": 6,
+      "weight": 124,
+      "base_experience": 60,
+      "type": [
+        "water"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
+      "id": "61YUnjW"
+    },
+    {
+      "name": "kabuto",
+      "height": 5,
+      "weight": 115,
+      "base_experience": 71,
+      "type": [
+        "rock",
+        "water"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/140.png",
+      "id": "X1BNm0I"
+    },
+    {
+      "name": "hitmonlee",
+      "height": 15,
+      "weight": 498,
+      "base_experience": 159,
+      "type": [
+        "fighting"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/106.png",
+      "id": "xjIJsCX"
+    },
+    {
+      "name": "mewtwo",
+      "height": 20,
+      "weight": 1220,
+      "base_experience": 340,
+      "type": [
+        "psychic"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+      "id": "iVb2C_R"
     }
   ]
 }
