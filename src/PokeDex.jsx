@@ -104,8 +104,6 @@ const PokeDex = () => {
                 </span>
               ))}
             </p>
-
-            {/* ❤️/💔 Favorite Button */}
             <button
               onClick={(e) => toggleFavorite(e, card.id)}
               className="favorite-btn"

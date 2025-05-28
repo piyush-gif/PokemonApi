@@ -18,29 +18,6 @@
   border: 1px solid #ddd;
 }
 
-.evolve-btn {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.evolve-btn button {
-  padding: 10px 25px;
-  background-color: rgb(6, 6, 46);
-  border: none;
-  color: yellow;
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.evolve-btn button:hover {
-  background-color: #f1356d;
-  transform: translateY(-2px);
-}
-
 [class^="type-"] {
   display: inline-block;
   padding: 4px 10px;

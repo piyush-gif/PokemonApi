@@ -81,17 +81,6 @@
       "id": "zOeOLnP"
     },
     {
-      "name": "poliwag",
-      "height": 6,
-      "weight": 124,
-      "base_experience": 60,
-      "type": [
-        "water"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
-      "id": "61YUnjW"
-    },
-    {
       "name": "kabuto",
       "height": 5,
       "weight": 115,
@@ -124,6 +113,29 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
       "id": "iVb2C_R"
+    },
+    {
+      "name": "bulbasaur",
+      "height": 7,
+      "weight": 69,
+      "base_experience": 64,
+      "type": [
+        "grass",
+        "poison"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "id": "9kLiG-R"
+    },
+    {
+      "name": "golduck",
+      "height": 17,
+      "weight": 766,
+      "base_experience": 175,
+      "type": [
+        "water"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
+      "id": "8oNLRJT"
     }
   ]
 }

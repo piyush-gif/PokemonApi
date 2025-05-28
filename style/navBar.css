@@ -1,31 +1,40 @@
 .navbar {
-  padding: 20px;
-  display: flex;
+  background-color: rgb(6, 6, 46);
+  display:flex;
+  position: sticky;
   align-items: center;
-  max-width: 1000px;
-  margin: 0 auto 30px;
-  border-bottom: 1px solid #f2f2f2;
-  background-color: rgb(6, 6, 46); /* dark blue */
   color: yellow;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  top: 0;
 }
 
 .navbar .links {
   margin-left: auto;
 }
 
-.navbar a {
-  margin-left: 16px;
+.navbar a:hover{
+  background-color: #f1356d;
+  color: white;
+}
+.navbar h1{
+  margin-left: 10px;
+
+}
+  
+.navbar a{
+  margin:15px;
   text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 5px;
+  padding: 10px;
   color: yellow;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  border-radius: 5px;
 }
 
-.navbar a:hover {
-  background-color: #f1356d; /* pinkish hover */
-  color: white;
+.navbar button{
+  margin:15px;
+  border-radius: 5px;
+}
+
+.navbar span{
+  margin:15px;
+  border-radius: 5px;
 }

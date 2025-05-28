@@ -1,15 +1,22 @@
 .pokedex-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 columns, equal width */
-  gap: 10px;
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 columns, equal width 
+  gap: 10px; */
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-around;
 }
 .pokemon-card {
+  width:240px;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   background: white;
+  margin-bottom: 8px;
+  padding: 8px;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  
 }
 
 .pokemon-card:hover {
