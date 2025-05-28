@@ -1,17 +1,6 @@
 {
   "pokemons": [
     {
-      "id": "1",
-      "name": "pikachu",
-      "height": 4,
-      "weight": 60,
-      "base_experience": 112,
-      "type": [
-        "electric"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png"
-    },
-    {
       "id": "2",
       "name": "venusaur",
       "height": 20,
@@ -45,18 +34,6 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
       "id": "eWwWQH7"
-    },
-    {
-      "name": "bulbasaur",
-      "height": 7,
-      "weight": 69,
-      "base_experience": 64,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "id": "U-ysrz1"
     },
     {
       "name": "eevee",
