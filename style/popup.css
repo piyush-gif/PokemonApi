@@ -13,7 +13,7 @@
 }
 
 .popup-card {
-  background-color: #fff;
+  background-color: beige;
   padding: 2rem;
   border-radius: 16px;
   width: 90%;
@@ -24,8 +24,8 @@
 }
 
 .popup-card img {
-  max-width: 150px;
-  height: auto;
+  width: 180px;
+  height: 180px;
   margin: 1rem 0;
 }
 
@@ -53,11 +53,7 @@
   background-color: #e84118;
 }
 
-/* Pokémon type styling */
-.popup-card .type-fire { background: #f08030; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
-.popup-card .type-water { background: #6890f0; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
-.popup-card .type-grass { background: #78c850; color: white; padding: 2px 6px; border-radius: 5px; margin: 0 4px; }
-/* Add more types as needed... */
+
 
 @keyframes slideUp {
   from {

@@ -36,17 +36,6 @@
       "id": "eWwWQH7"
     },
     {
-      "name": "eevee",
-      "height": 3,
-      "weight": 65,
-      "base_experience": 65,
-      "type": [
-        "normal"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png",
-      "id": "TyA75HK"
-    },
-    {
       "name": "leafeon",
       "height": 10,
       "weight": 255,
@@ -147,6 +136,18 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png",
       "id": "M4fU-60"
+    },
+    {
+      "name": "charizard",
+      "height": 17,
+      "weight": 905,
+      "base_experience": 267,
+      "type": [
+        "fire",
+        "flying"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+      "id": "5tqKWsx"
     }
   ]
 }

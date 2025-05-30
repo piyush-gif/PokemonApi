@@ -4,9 +4,9 @@
   position: sticky;
   align-items: center;
   color: yellow;
-  z-index: 1000;
   top: 0;
   height: 50px;
+  z-index: 99999;
 }
 
 .navbar .links {
@@ -19,9 +19,7 @@
 }
 .navbar h1{
   margin-left: 10px;
-
 }
-  
 .navbar a{
   margin:15px;
   text-decoration: none;
@@ -39,26 +37,4 @@
   margin:15px;
   border-radius: 5px;
 }
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    padding: 10px;
-  }
 
-  .navbar .links {
-    flex-direction: column;
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .navbar a,
-  .navbar button,
-  .navbar span {
-    width: 100%;
-    text-align: left;
-    margin: 5px 0;
-    padding: 10px;
-  }
-}

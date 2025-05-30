@@ -5,14 +5,10 @@
   margin: 0;
 }
 
-.app {
-  min-height: 100vh;
-  background-image: url('/images/background.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size:cover;
+body {
+  background-color: bisque;
+  height: 150vh;
 }
-
 
 
 input[type="text"] {

@@ -8,8 +8,9 @@ const Home = () => {
     pokeData,
     error,
     showDetails,
-    setShowDetails,
-    handleClick,evolve, evoError
+    handleClick,
+    evolve, 
+    evoError
   } = useFetch();
   
   const saveHandle= () => { 
@@ -65,7 +66,15 @@ const Home = () => {
             <br></br>
             {showDetails && (
               <div>
-                <p>Type: {pokeData.types.map((t) => (`${t.type.name} `))}</p>
+                <p> 
+                  Type:{' '} 
+                  {pokeData.types.map((t) => (
+                    <span key={t.type.name} className={`type-${t.type.name}`}>
+                      {' '}
+                      {t.type.name}{' '}
+                    </span>
+                  ))}
+                </p>
               </div>
             )}
         </div>
