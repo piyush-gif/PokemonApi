@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const pokedexSlice = createSlice({
   name: 'pokedex',
   initialState: {
-    totalItems: 0,
+    totalItems: '',
   },
   reducers: {
     setTotalItems: (state, action) => {

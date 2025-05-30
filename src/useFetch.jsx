@@ -41,6 +41,7 @@ const useFetch =() =>{
       return res.json();
     })
     .then((evolutionData) => {
+      console.log(evolutionData);
       setEvolve(evolutionData);
     })
     .catch((err) => {
