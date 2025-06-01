@@ -8,7 +8,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  
+
   const isOnPokedexPage = location.pathname === '/PokeDex'; 
   const toggleTheme = () => {
     dispatch(setTheme(mode === 'light' ? 'dark' : 'light'));
@@ -17,13 +17,15 @@ const NavBar = () => {
   return ( 
     <nav className="navbar">
       <h1>Pokemon World</h1>
+      
       <div className="links">
+         {totalItems && isOnPokedexPage &&( <span className="total-items">Total: {totalItems}</span>)} 
         <Link to="/">Home</Link>
         <Link to="/PokeDex">Pokedex</Link>
-        {totalItems && isOnPokedexPage &&( <span className="total-items">Total: {totalItems}</span>)}
+        
         
         <button onClick={toggleTheme} className="theme-toggle">
-          {mode === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+          {mode === 'light' ? '🌙' : '☀️'}
         </button>
       </div>
     </nav>

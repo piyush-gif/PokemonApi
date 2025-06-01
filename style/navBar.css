@@ -1,5 +1,11 @@
+:root{
+  --nav-color:black;
+  --text-color:white;
+}
+
 .navbar {
   background-color: rgb(6, 6, 46);
+  
   display:flex;
   position: sticky;
   align-items: center;
@@ -8,7 +14,9 @@
   height: 50px;
   z-index: 99999;
 }
-
+.navbar.dark-mode{
+  background-color:var(--nav-color);
+}
 .navbar .links {
   margin-left: auto;
 }
@@ -29,7 +37,7 @@
 }
 
 .navbar button{
-  margin:15px;
+  margin:1px;
   border-radius: 5px;
 }
 

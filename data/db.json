@@ -36,17 +36,6 @@
       "id": "eWwWQH7"
     },
     {
-      "name": "leafeon",
-      "height": 10,
-      "weight": 255,
-      "base_experience": 184,
-      "type": [
-        "grass"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/470.png",
-      "id": "o7esxyC"
-    },
-    {
       "name": "gloom",
       "height": 8,
       "weight": 86,
@@ -148,6 +137,18 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
       "id": "5tqKWsx"
+    },
+    {
+      "name": "nidoqueen",
+      "height": 13,
+      "weight": 600,
+      "base_experience": 253,
+      "type": [
+        "poison",
+        "ground"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png",
+      "id": "9BS4ckd"
     }
   ]
 }

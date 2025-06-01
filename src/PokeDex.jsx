@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTotalItems } from './pokedexSlice.js';
 import { openPopup, fetchPokemonDetails } from './popupSlice.js';
-import { addFavorite, removeFavorite } from './favoriteSlice.js';
+
 
 const PokeDex = () => {
   const [error, setError] = useState(null);
@@ -17,6 +17,7 @@ const PokeDex = () => {
   const favoriteIds = useSelector((state) => state.favorite); // 👈 Get favorite Pokémon IDs
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
       .then((res) => {
         if (!res.ok) {
@@ -41,6 +42,7 @@ const PokeDex = () => {
   }, [page]);
 
   const handleDelete = (id) => {
+    setLoading(true);
     fetch(`http://localhost:8000/pokemons/${id}`, {
       method: 'DELETE',
     })
@@ -56,22 +58,9 @@ const PokeDex = () => {
       });
   };
 
-  const toggleFavorite = (e, id) => {
-    e.stopPropagation(); // Prevent card click
-    if (favoriteIds.includes(id)) {
-      dispatch(removeFavorite(id));
-    } else {
-      dispatch(addFavorite(id));
-    }
-  };
-
-  if (loading) return <div>Loading Pokémon...</div>;
-  if (error) return <div>Error: {error}</div>;
-
   const filteredCards = cards.filter((card) =>
     card.name.toLowerCase().includes(searchTerm)
   );
-
   return (
     <div className="pokedex-wrapper">
       <div className="search-bar">
@@ -104,11 +93,9 @@ const PokeDex = () => {
                 </span>
               ))}
             </p>
-            <button
-              onClick={(e) => toggleFavorite(e, card.id)}
+            <button onClick={(e) => toggleFavorite(card.id)}
               className="favorite-btn"
-            >
-              {favoriteIds.includes(card.id) ? '🩶' : '❤️'}
+            > 
             </button>
 
             <button
