@@ -11,6 +11,7 @@ const PokeDex = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showFavorites, setShowFavorites] = useState(false);
   const [favorites, setFavorites] = useState(() => {
     const stored = localStorage.getItem('favorites');
     return stored ? JSON.parse(stored): {};
@@ -65,9 +66,10 @@ const PokeDex = () => {
       });
   };
 
-  const filteredCards = cards.filter((card) =>
-    card.name.toLowerCase().includes(searchTerm)
-  );
+  const filteredCards = cards
+    .filter(card => card.name.toLowerCase().includes(searchTerm))
+    .filter(card => !showFavorites || favorites[card.id]);
+
 
   const handelFav = (id) =>{
     setFavorites(prev => ({...prev,[id]: !prev[id],}));
@@ -82,6 +84,9 @@ const PokeDex = () => {
           onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
         />
       </div>
+      <button onClick={() => setShowFavorites(prev => !prev)}>
+        {showFavorites ? "Show All" : "Show Favorites"}
+      </button>
 
       <div className="pokedex-container">
         {filteredCards.map((card) => (
