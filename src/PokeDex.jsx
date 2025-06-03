@@ -17,7 +17,7 @@ const PokeDex = () => {
     return stored ? JSON.parse(stored): {};
   });
 
-  const limit = 10;
+  const limit = 8;
   const dispatch = useDispatch();
   
 

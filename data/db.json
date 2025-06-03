@@ -24,18 +24,6 @@
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
     },
     {
-      "name": "bulbasaur",
-      "height": 7,
-      "weight": 69,
-      "base_experience": 64,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "id": "eWwWQH7"
-    },
-    {
       "name": "gloom",
       "height": 8,
       "weight": 86,
@@ -91,18 +79,6 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
       "id": "iVb2C_R"
-    },
-    {
-      "name": "bulbasaur",
-      "height": 7,
-      "weight": 69,
-      "base_experience": 64,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "id": "9kLiG-R"
     },
     {
       "name": "golduck",

@@ -1,55 +1,141 @@
-.pokedex-container {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: space-around;
+/* Container */
+.pokedex-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #344e5c;
+  border-radius: 10px;
+  padding-bottom: 50px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-.pokemon-card {
-  width:240px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  background-color: beige;
-  margin-bottom: 8px;
-  padding: 8px;
+
+/* Search bar */
+.search-bar {
+  margin-bottom: 15px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  
+}
+
+.search-bar input {
+  width: 70%;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+
+.pokedex-wrapper > button {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pokedex-wrapper > button:hover {
+  background-color: #0056b3;
+}
+
+/* Grid container for cards */
+.pokedex-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  gap: 20px;
+}
+
+/* Each Pokemon card */
+.pokemon-card {
+  background: beige;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.15s ease;
 }
 
 .pokemon-card:hover {
-  cursor: pointer;
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
 }
 
-.pokemon-card img{
-  width:100px;
+/* Pokemon image */
+.pokemon-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
+/* Pokemon name */
 .pokemon-card h3 {
-  color: #333;
-  margin-top: 10px;
-  text-transform: capitalize;
+  margin: 8px 0;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-/* Styling for general paragraph text within a Pokemon card */
+/* Pokemon types */
 .pokemon-card p {
-  margin: 5px 0;
-  color: #666;
+  margin: 8px 0;
   font-size: 14px;
 }
 
-/* --- Pokémon type styling for .pokemon-card --- */
+.pokemon-card span {
+  display: inline-block;
+  padding: 3px 8px;
+  margin: 0 4px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: white;
+}
+
+/* Buttons inside card */
+.pokemon-card button {
+  margin: 5px 5px 0 5px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.favorite-btn {
+  background-color:rgb(6, 6, 46);
+}
+
+
+/* Pagination controls */
+.pagination-controls {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.pagination-controls button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 18px;
+  padding: 6px 14px;
+  margin: 0 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 
 .type-normal { background-color: #A8A77A; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-fire { background-color: #EE8130; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-water { background-color: #6390F0; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
-.type-electric { background-color: #F7D02C; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } /* Black text for better contrast */
+.type-electric { background-color: #F7D02C; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } 
 .type-grass { background-color: #7AC74C; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
-.type-ice { background-color: #96D9D6; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } /* Black text for better contrast */
+.type-ice { background-color: #96D9D6; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } 
 .type-fighting { background-color: #C22E28; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-poison { background-color: #A33EA1; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
-.type-ground { background-color: #E2BF65; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } /* Black text for better contrast */
+.type-ground { background-color: #E2BF65; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } 
 .type-flying { background-color: #A98FF3; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-psychic { background-color: #F95587; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-bug { background-color: #A6B91A; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
@@ -57,19 +143,6 @@
 .type-ghost { background-color: #735797; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-dragon { background-color: #6F35FC; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 .type-dark { background-color: #705746; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
-.type-steel { background-color: #B7B7CE; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } /* Black text for better contrast */
+.type-steel { background-color: #B7B7CE; color: black; padding: 4px 6px; border-radius: 5px; margin: 0 4px; } 
 .type-fairy { background-color: #D685AD; color: white; padding: 4px 6px; border-radius: 5px; margin: 0 4px; }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0;
-}
-
-.search-bar input {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  width: 80%;
-  max-width: 400px;
-}
