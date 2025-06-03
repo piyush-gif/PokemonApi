@@ -11,11 +11,18 @@ const PokeDex = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [favorites, setFavorites] = useState(() => {
+    const stored = localStorage.getItem('favorites');
+    return stored ? JSON.parse(stored): {};
+  });
 
   const limit = 10;
   const dispatch = useDispatch();
-  const favoriteIds = useSelector((state) => state.favorite); // 👈 Get favorite Pokémon IDs
+  
 
+  useEffect (() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  },[favorites])
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
@@ -61,6 +68,10 @@ const PokeDex = () => {
   const filteredCards = cards.filter((card) =>
     card.name.toLowerCase().includes(searchTerm)
   );
+
+  const handelFav = (id) =>{
+    setFavorites(prev => ({...prev,[id]: !prev[id],}));
+  };
   return (
     <div className="pokedex-wrapper">
       <div className="search-bar">
@@ -93,9 +104,12 @@ const PokeDex = () => {
                 </span>
               ))}
             </p>
-            <button onClick={(e) => toggleFavorite(card.id)}
+            <button onClick={(e) => {
+              e.stopPropagation();
+              handelFav(card.id);
+            }}
               className="favorite-btn"
-            > 
+          >{favorites[card.id] ? "❤️" : "🩶"}
             </button>
 
             <button
