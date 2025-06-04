@@ -37,7 +37,11 @@
 .popup-card p {
   margin: 0.25rem 0;
 }
-
+.popup-card span {
+  border-radius: 8px;
+  padding:5px;
+  margin-left:2px;
+}
 .popup-card button {
   margin-top: 1rem;
   padding: 0.5rem 1rem;

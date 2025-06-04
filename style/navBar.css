@@ -1,48 +1,70 @@
-:root{
-  --nav-color:black;
-  --text-color:white;
+:root {
+  --nav-bg: beige;
+  --nav-text: #000000;
+  --nav-hover: #f1356d;
+  --nav-link: #000000;
+  --nav-hover-text: #000000;
+  --theme-toggle-bg: #ffcb05;
+  --theme-toggle-text: #000;
+}
+
+.dark {
+  --nav-bg: rgb(6, 6, 46);
+  --nav-text: #ffcb05;
+  --nav-link: #ffcb05;
+  --nav-hover: #e60023;
+  --nav-hover-text: white;
+  --theme-toggle-bg: #8a95ed;
+  --theme-toggle-text: #fff;
 }
 
 .navbar {
-  background-color: rgb(6, 6, 46);
-  
-  display:flex;
+  background-color: var(--nav-bg);
+  display: flex;
   position: sticky;
   align-items: center;
-  color: yellow;
   top: 0;
   height: 50px;
   z-index: 99999;
-}
-.navbar.dark-mode{
-  background-color:var(--nav-color);
-}
-.navbar .links {
-  margin-left: auto;
+  color: var(--nav-text);
 }
 
-.navbar a:hover{
-  background-color: #f1356d;
-  color: white;
-}
-.navbar h1{
+.navbar h1 {
   margin-left: 10px;
 }
-.navbar a{
-  margin:15px;
+
+.navbar .links {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  margin: 15px;
   text-decoration: none;
   padding: 10px;
-  color: yellow;
+  color: var(--nav-link);
   border-radius: 5px;
+  transition: background 0.3s;
 }
 
-.navbar button{
-  margin:1px;
-  border-radius: 5px;
+.navbar a:hover {
+  background-color: var(--nav-hover);
+  color: var(--nav-hover-text);
 }
 
-.navbar span{
-  margin:15px;
+.navbar button {
+  margin: 5px;
   border-radius: 5px;
+  padding: 5px 10px;
+  background-color: var(--theme-toggle-bg);
+  color: var(--theme-toggle-text);
+  border: none;
+  cursor: pointer;
 }
 
+.navbar span {
+  margin: 15px;
+  border-radius: 5px;
+  color: var(--nav-text);
+}

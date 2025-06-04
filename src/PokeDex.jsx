@@ -43,7 +43,6 @@ useEffect(() => {
         setLoading(false);
       });
   } else {
-    // Re-fetch current paginated data when switching back to normal mode
     setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
       .then((res) => {

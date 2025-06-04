@@ -159,6 +159,18 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
       "id": "oWQbiuh"
+    },
+    {
+      "name": "bulbasaur",
+      "height": 7,
+      "weight": 69,
+      "base_experience": 64,
+      "type": [
+        "grass",
+        "poison"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "id": "5-4PeZv"
     }
   ]
 }

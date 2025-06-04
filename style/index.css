@@ -5,14 +5,7 @@
   margin: 0;
   box-sizing: border-box;
 }
-:root{
-  --nav-color:black;
-  --text-color:white;
-}
-body.dark-mode{
-    background-color: var(--nav-color);
 
-}
 body {
   background-color: bisque;
   height: 100vh;
@@ -31,9 +24,7 @@ input[type="text"]:focus {
   border-color: rgb(6, 6, 46);
   outline: none;
 }
-button.dark-mode{
-  background-color: var(--nav-color);
-}
+
 button {
   padding: 10px 20px;
   margin: 15px 5px 0;
@@ -51,3 +42,4 @@ button:hover {
   background-color: #f1356d;
   color: white;
 }
+

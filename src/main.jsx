@@ -8,11 +8,14 @@ import '../style/popup.css'
 import App from './App.jsx'
 import store from './store.jsx'
 import { Provider } from 'react-redux'
+import { ThemeProvider } from './theme';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </StrictMode>,
 )
