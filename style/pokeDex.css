@@ -16,9 +16,9 @@
 }
 
 .search-bar input {
-  width: 70%;
-  padding: 8px 12px;
+  padding: 15px 15px;
   font-size: 16px;
+  width: 80px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -29,7 +29,7 @@
   margin: 0 auto 20px;
   padding: 8px 16px;
   font-size: 16px;
-  background-color: #007bff;
+  background-color: #06213d;
   color: white;
   border: none;
   border-radius: 6px;
@@ -38,7 +38,7 @@
 }
 
 .pokedex-wrapper > button:hover {
-  background-color: #0056b3;
+  background-color: #0d2846;
 }
 
 /* Grid container for cards */
@@ -116,7 +116,7 @@
 }
 
 .pagination-controls button {
-  background-color: #007bff;
+  background-color: #812769;
   border: none;
   color: white;
   font-size: 18px;

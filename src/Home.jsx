@@ -40,10 +40,12 @@ const Home = () => {
   };
   return ( 
     <div className="main"> 
+    <img className= "snorlax" src='../public/images/snorlax.png'/>
     <div className="intro">
       <h1>Welcome</h1>
       <h2>to Pokemon World</h2>
       <p>Enter the name of the pokemon</p>
+      
       <input 
       type="text" 
       required

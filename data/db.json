@@ -103,28 +103,62 @@
       "id": "M4fU-60"
     },
     {
+      "name": "gyarados",
+      "height": 65,
+      "weight": 2350,
+      "base_experience": 189,
+      "type": [
+        "water",
+        "flying"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png",
+      "id": "reXS5Kq"
+    },
+    {
+      "name": "espeon",
+      "height": 9,
+      "weight": 265,
+      "base_experience": 184,
+      "type": [
+        "psychic"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png",
+      "id": "5iQzdrj"
+    },
+    {
       "name": "charizard",
       "height": 17,
       "weight": 905,
-      "base_experience": 267,
+      "base_experience": 240,
       "type": [
         "fire",
         "flying"
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-      "id": "5tqKWsx"
+      "id": "p_LBDy_"
     },
     {
-      "name": "nidoqueen",
-      "height": 13,
-      "weight": 600,
-      "base_experience": 253,
+      "name": "snorlax",
+      "height": 21,
+      "weight": 4600,
+      "base_experience": 189,
       "type": [
-        "poison",
-        "ground"
+        "normal"
       ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png",
-      "id": "9BS4ckd"
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
+      "id": "uoo3L7C"
+    },
+    {
+      "name": "dragonite",
+      "height": 22,
+      "weight": 2100,
+      "base_experience": 270,
+      "type": [
+        "dragon",
+        "flying"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
+      "id": "oWQbiuh"
     }
   ]
 }

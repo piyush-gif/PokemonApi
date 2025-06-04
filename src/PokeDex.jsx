@@ -24,19 +24,35 @@ const PokeDex = () => {
   useEffect (() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   },[favorites])
-  useEffect(() => {
+
+useEffect(() => {
+  if (showFavorites) {
+    setLoading(true);
+    fetch(`http://localhost:8000/pokemons`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch all Pokémon');
+        return res.json();
+      })
+      .then((data) => {
+        const favCards = data.filter((card) => favorites[card.id]);
+        setCard(favCards);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  } else {
+    // Re-fetch current paginated data when switching back to normal mode
     setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch the data');
-        }
+        if (!res.ok) throw new Error('Failed to fetch paginated Pokémon');
         const totalItems = res.headers.get('X-Total-Count');
         if (totalItems) {
           setTotalPages(Math.ceil(totalItems / limit));
           dispatch(setTotalItems(Number(totalItems)));
         }
-        setLoading(true);
         return res.json();
       })
       .then((data) => {
@@ -47,7 +63,9 @@ const PokeDex = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, [page]);
+  }
+}, [showFavorites, page, favorites]);
+
 
   const handleDelete = (id) => {
     setLoading(true);
@@ -66,14 +84,18 @@ const PokeDex = () => {
       });
   };
 
-  const filteredCards = cards
+  let  filteredCards = cards
     .filter(card => card.name.toLowerCase().includes(searchTerm))
-    .filter(card => !showFavorites || favorites[card.id]);
 
+    // .filter(card => !showFavorites || favorites[card.id]);
+  if (showFavorites){
+    filteredCards = cards.filter(card => favorites[card.id]);
+    }
 
   const handelFav = (id) =>{
     setFavorites(prev => ({...prev,[id]: !prev[id],}));
   };
+  
   return (
     <div className="pokedex-wrapper">
       <div className="search-bar">

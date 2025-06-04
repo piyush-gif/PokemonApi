@@ -7,7 +7,18 @@
   color:aliceblue;
 }
 .main{
-  margin-bottom: 31px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #344e5c;
+  border-radius: 10px;
+  padding-bottom: 50px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.snorlax{
+  position:absolute;
+  width: 150px;
+  height: 215px;
 }
 .poke-name{
   text-align: center;
