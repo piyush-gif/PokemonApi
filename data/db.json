@@ -1,52 +1,6 @@
 {
   "pokemons": [
     {
-      "id": "2",
-      "name": "venusaur",
-      "height": 20,
-      "weight": 1000,
-      "base_experience": 263,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png"
-    },
-    {
-      "id": "4",
-      "name": "raichu",
-      "height": 8,
-      "weight": 300,
-      "base_experience": 243,
-      "type": [
-        "electric"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png"
-    },
-    {
-      "name": "gloom",
-      "height": 8,
-      "weight": 86,
-      "base_experience": 138,
-      "type": [
-        "grass",
-        "poison"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
-      "id": "b9bUM_d"
-    },
-    {
-      "name": "psyduck",
-      "height": 8,
-      "weight": 196,
-      "base_experience": 64,
-      "type": [
-        "water"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
-      "id": "zOeOLnP"
-    },
-    {
       "name": "kabuto",
       "height": 5,
       "weight": 115,
@@ -68,28 +22,6 @@
       ],
       "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/106.png",
       "id": "xjIJsCX"
-    },
-    {
-      "name": "mewtwo",
-      "height": 20,
-      "weight": 1220,
-      "base_experience": 340,
-      "type": [
-        "psychic"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
-      "id": "iVb2C_R"
-    },
-    {
-      "name": "golduck",
-      "height": 17,
-      "weight": 766,
-      "base_experience": 175,
-      "type": [
-        "water"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
-      "id": "8oNLRJT"
     },
     {
       "name": "eevee",
@@ -126,18 +58,6 @@
       "id": "5iQzdrj"
     },
     {
-      "name": "charizard",
-      "height": 17,
-      "weight": 905,
-      "base_experience": 240,
-      "type": [
-        "fire",
-        "flying"
-      ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-      "id": "p_LBDy_"
-    },
-    {
       "name": "snorlax",
       "height": 21,
       "weight": 4600,
@@ -161,16 +81,27 @@
       "id": "oWQbiuh"
     },
     {
-      "name": "bulbasaur",
-      "height": 7,
-      "weight": 69,
-      "base_experience": 64,
+      "name": "charizard",
+      "height": 17,
+      "weight": 905,
+      "base_experience": 240,
       "type": [
-        "grass",
-        "poison"
+        "fire",
+        "flying"
       ],
-      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-      "id": "5-4PeZv"
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+      "id": "WICWgmG"
+    },
+    {
+      "name": "ditto",
+      "height": 3,
+      "weight": 40,
+      "base_experience": 101,
+      "type": [
+        "normal"
+      ],
+      "img": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      "id": "eyzXgob"
     }
   ]
 }
