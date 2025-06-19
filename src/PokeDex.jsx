@@ -25,23 +25,23 @@ const PokeDex = () => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   },[favorites])
 
-useEffect(() => {
-  if (showFavorites) {
-    setLoading(true);
-    fetch(`http://localhost:8000/pokemons`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch all Pokémon');
-        return res.json();
-      })
-      .then((data) => {
-        const favCards = data.filter((card) => favorites[card.id]);
-        setCard(favCards);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
+  useEffect(() => {
+    if (showFavorites) {
+      setLoading(true);
+      fetch(`http://localhost:8000/pokemons`)
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to fetch all Pokémon');
+          return res.json();
+        })
+        .then((data) => {
+          const favCards = data.filter((card) => favorites[card.id]);
+          setCard(favCards);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+    });
   } else {
     setLoading(true);
     fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)

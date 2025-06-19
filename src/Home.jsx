@@ -23,13 +23,12 @@ const Home = () => {
       type: pokeData.types.map(t => t.type.name),
       img: pokeData.sprites.front_default
     }
-    fetch('http://localhost:8000/pokemons',{
+    fetch('http://localhost:5000/save-data',{
       method:'POST',
       headers: {
         "Content-Type" : "application/json",
       },
       body: JSON.stringify(pokemonData),
-
     })
     .then((res) => {
       if(!res.ok) throw Error ("could not save the pokemon");
