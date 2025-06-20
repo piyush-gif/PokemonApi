@@ -28,7 +28,7 @@ const PokeDex = () => {
   useEffect(() => {
     if (showFavorites) {
       setLoading(true);
-      fetch(`http://localhost:8000/pokemons`)
+      fetch(`http://localhost:5000/get-data`)
         .then((res) => {
           if (!res.ok) throw new Error('Failed to fetch all Pokémon');
           return res.json();
@@ -44,7 +44,7 @@ const PokeDex = () => {
     });
   } else {
     setLoading(true);
-    fetch(`http://localhost:8000/pokemons?_page=${page}&_limit=${limit}`)
+    fetch(`http://localhost:5000/get-data?_page=${page}&_limit=${limit}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch paginated Pokémon');
         const totalItems = res.headers.get('X-Total-Count');
@@ -68,7 +68,7 @@ const PokeDex = () => {
 
   const handleDelete = (id) => {
     setLoading(true);
-    fetch(`http://localhost:8000/pokemons/${id}`, {
+    fetch(`http://localhost:5000/get-data/${id}`, {
       method: 'DELETE',
     })
       .then((res) => {
