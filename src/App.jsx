@@ -1,33 +1,19 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './NavBar';
-import Home from './Home';
-import PokeDex from './PokeDex';
-import Popup from './popup';
-import { ThemeProvider, useTheme } from './theme';
+import NavBar from './NavBar.jsx';
+import Home from './Home.jsx';
+import PokeDex from './PokeDex.jsx';
 
-const ThemedApp = () => {
-  const { mode } = useTheme();
-
+const App = () => {
   return (
-    <div className={`app ${mode}`}>
+    <div>
       <Router>
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Pokedex" element={<PokeDex />} />
         </Routes>
-        <Popup />
       </Router>
     </div>
   );
 };
-
-function App() {
-  return (
-    <ThemeProvider>
-      <ThemedApp />
-    </ThemeProvider>
-  );
-}
-
 export default App;
