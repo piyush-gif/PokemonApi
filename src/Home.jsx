@@ -1,7 +1,11 @@
 import { useState } from "react";
+import useFetch from "./useFetch";
 
 const Home = () => {
   const [name, setName] = useState("");
+
+  const {data, loading, error} = useFetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+           
    return(
     <div>
       <div>
