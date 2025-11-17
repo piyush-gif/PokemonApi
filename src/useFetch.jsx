@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 // https://pokeapi.co/api/v2/pokemon/{id or name}/
-const useFetch = () => {
+const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+
+    if(!url) return;
+    fetch(`${url}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch');
@@ -16,15 +17,16 @@ const useFetch = () => {
       })
       .then(data => {
         setData(data);
+        console.log(data);
         setLoading(false);
       })
       .catch(err => {
         setError(err.message);
         setLoading(false);
       });
-  });
+  },[url]);
 
-  return { data, loading, error, name};
+  return { data, loading, error};
 };
 
 export default useFetch;
