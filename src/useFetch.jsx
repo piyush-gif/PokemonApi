@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 // https://pokeapi.co/api/v2/pokemon/{id or name}/
 const useFetch = (url) => {
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
 
-    if(!url) return;
-    fetch(`${url}`)
+    if (!url || url.endsWith('pokemon/')) return;
+    setLoading(true);
+    fetch(url)
       .then(res => {
         if (!res.ok) {
           throw new Error('Failed to fetch');
@@ -16,8 +17,8 @@ const useFetch = (url) => {
         return res.json();
       })
       .then(data => {
+        console.log(data); 
         setData(data);
-        console.log(data);
         setLoading(false);
       })
       .catch(err => {
