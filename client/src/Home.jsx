@@ -3,13 +3,19 @@ import useFetch from "./useFetch";
 
 const Home = () => {
   const [name, setName] = useState("");
-  const [searchName, setSeatchName] = useState("");
+  const [searchName, setSeatchName] = useState("charizard");
   const {data, loading, error} = useFetch(`https://pokeapi.co/api/v2/pokemon/${searchName}`);
   
   const handleClick = () => {
     setSeatchName(name.toLowerCase());
   }
-
+  const handleSave = () => {
+    fetch('http://localhost:3000',{
+      method : 'POST',
+      headers: {  "Content-Type" : "application/json"},
+      body: JSON.stringify(data)
+    })
+  }
    return(
     <div>
       <div>
@@ -21,6 +27,7 @@ const Home = () => {
           onChange={e => setName(e.target.value)}
         />
         <button onClick={handleClick}>Search</button>
+        <button onClick={handleSave}>Save</button>
       </div>
       <div>
         {loading && <p>Loading...</p>}
