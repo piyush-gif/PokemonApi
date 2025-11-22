@@ -9,6 +9,7 @@ const useFetch = (url) => {
 
     if (!url || url.endsWith('pokemon/')) return;
     setLoading(true);
+    setError(null);
     fetch(url)
       .then(res => {
         if (!res.ok) {
@@ -17,7 +18,6 @@ const useFetch = (url) => {
         return res.json();
       })
       .then(data => {
-        console.log(data); 
         setData(data);
         setLoading(false);
       })
