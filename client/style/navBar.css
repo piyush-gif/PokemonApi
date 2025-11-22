@@ -8,15 +8,6 @@
   --theme-toggle-text: #000;
 }
 
-.dark {
-  --nav-bg: rgb(6, 6, 46);
-  --nav-text: #ffcb05;
-  --nav-link: #ffcb05;
-  --nav-hover: #e60023;
-  --nav-hover-text: white;
-  --theme-toggle-bg: #8a95ed;
-  --theme-toggle-text: #fff;
-}
 
 .navbar {
   background-color: var(--nav-bg);
@@ -61,10 +52,4 @@
   color: var(--theme-toggle-text);
   border: none;
   cursor: pointer;
-}
-
-.navbar span {
-  margin: 15px;
-  border-radius: 5px;
-  color: var(--nav-text);
 }

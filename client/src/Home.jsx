@@ -40,17 +40,26 @@ const Home = () => {
         
         {data && (
           <div>
-            <h2>{data.name}</h2>
-            <img src={data.sprites.back_default} alt={data.name} />
+            <h2>{data.name} #{data.id}</h2>
             <img src={data.sprites.front_default} alt={data.name} />
-            <p>{data.types.map(data=> data.type.name)}</p>
-            <p>{data.weight}</p>
-              {/* <ul>{data.moves.map(data => data.move.name)}</ul> */}
-            <p>{data.base_experience}</p>
+            <img src={data.sprites.back_default} alt={data.name} />
+            {data.sprites.front_shiny && <img src={data.sprites.front_shiny} alt={data.name} />}
+            
+            <p>Type: {data.types.map(type => type.type.name).join(', ')}</p>
+            <p>Height: {data.height / 10} m</p>
+            <p>Weight: {data.weight / 10} kg</p>
+            <p>Base Experience: {data.base_experience}</p>
+            <p>Abilities: {data.abilities.map(ability => ability.ability.name).join(', ')}</p>
+            
+            <h3>Stats</h3>
+            {data.stats.map((stat, index) => (
+              <p key={index}>{stat.stat.name}: {stat.base_stat}</p>
+            ))}
           </div>
         )}
       </div>
     </div>  
+  
   )
 }
  
