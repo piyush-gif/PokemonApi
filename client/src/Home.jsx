@@ -10,10 +10,15 @@ const Home = () => {
     setSeatchName(name.toLowerCase());
   }
   const handleSave = () => {
-    fetch('http://localhost:3000',{
+
+    const PokeData = {
+      name:data.name
+
+    }
+    fetch('http://localhost:3000/pokemons',{
       method : 'POST',
       headers: {  "Content-Type" : "application/json"},
-      body: JSON.stringify(data)
+      body: JSON.stringify(PokeData)
     })
   }
    return(
@@ -38,7 +43,10 @@ const Home = () => {
             <h2>{data.name}</h2>
             <img src={data.sprites.back_default} alt={data.name} />
             <img src={data.sprites.front_default} alt={data.name} />
-            <img src= {data.sprites.front_shiny} alt = {data.name}/>
+            <p>{data.types.map(data=> data.type.name)}</p>
+            <p>{data.weight}</p>
+              {/* <ul>{data.moves.map(data => data.move.name)}</ul> */}
+            <p>{data.base_experience}</p>
           </div>
         )}
       </div>
