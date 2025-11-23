@@ -1,41 +1,67 @@
 import { useState } from "react";
 import useFetch from "./useFetch";
 import snorlax from "../public/images/snorlax.png";
+
 const Home = () => {
   const [name, setName] = useState("");
-  const [searchName, setSeatchName] = useState("");
+  const [searchName, setSearchName] = useState("");
+  const [saveStatus, setSaveStatus] = useState(""); // For user feedback
   const {data, loading, error} = useFetch(`https://pokeapi.co/api/v2/pokemon/${searchName}`);
   
   const handleClick = () => {
-    setSeatchName(name.toLowerCase());
+    setSearchName(name.toLowerCase());
+    setSaveStatus(""); // Clear previous save status
   }
-  const handleSave = () => {
 
-    const PokeData = {
-      name:data.name,
-      id: data.id,
-      sprite:data.sprites.front_default,
-      types: data.types.map(data=> data.type.name),
-      height:data.height,
-      weight: data.weight,
-      base_experience: data.base_experience,
-      abilities: data.abilities.map(ability=> ability.ability.name),
-      stats: data.stats.map(stat =>({
-        name : stat.stat.name,
-        value: stat.base_stat
-      }))
-    };
+  const handleSave = async () => {
+    // Guard clause - only proceed if data exists
+    if (!data) return;
 
-    fetch('http://localhost:3000/pokemons',{
-      method : 'POST',
-      headers: {  "Content-Type" : "application/json"},
-      body: JSON.stringify(PokeData)
-    })
+    try {
+      // Check if Pokemon already exists
+      const checkResponse = await fetch(`http://localhost:3000/pokemons?id=${data.id}`);
+      const existingPokemon = await checkResponse.json();
+      
+      if (existingPokemon && existingPokemon.length > 0) {
+        setSaveStatus("This Pokemon is already in your Pokedex!");
+        return;
+      }
+
+      // If not exists, save it
+      const PokeData = {
+        name: data.name,
+        id: data.id,
+        sprite: data.sprites.front_default,
+        types: data.types.map(type => type.type.name),
+        height: data.height,
+        weight: data.weight,
+        base_experience: data.base_experience,
+        abilities: data.abilities.map(ability => ability.ability.name),
+        stats: data.stats.map(stat => ({
+          name: stat.stat.name,
+          value: stat.base_stat
+        }))
+      };
+
+      const saveResponse = await fetch('http://localhost:3000/pokemons', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(PokeData)
+      });
+
+      if (!saveResponse.ok) throw new Error('Failed to save');
+      
+      setSaveStatus("Pokemon saved successfully!");
+    } catch (err) {
+      setSaveStatus("Failed to save Pokemon");
+      console.error(err);
+    }
   }
-   return(
+
+  return(
     <div className="home-container">
       <div className="search-section">
-        <img className="snorlax" src= {snorlax}/>
+        <img className="snorlax" src={snorlax} alt="Snorlax"/>
         <h1>Welcome to Pokemon World!</h1>
         
         <p>Enter the pokemon name</p>
@@ -45,7 +71,13 @@ const Home = () => {
           onChange={e => setName(e.target.value)}
         />
         <button onClick={handleClick}>Search</button>
-        <button onClick={handleSave}>Save</button>
+        <button 
+          onClick={handleSave} 
+          disabled={!data || loading || error}
+        >
+          Save
+        </button>
+        {saveStatus && <p className="save-status">{saveStatus}</p>}
       </div>
       <div>
         {loading && <p>Loading...</p>}

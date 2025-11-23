@@ -1,4 +1,5 @@
-const PokemonCard = ({pokemon}) => {
+const PokemonCard = ({pokemon, onDelete}) => {
+
   return ( 
     <div className="pokedex-card">
       <div className="card-header">
@@ -20,6 +21,7 @@ const PokemonCard = ({pokemon}) => {
         <p className="pokemon-height">Height: {pokemon.height / 10} m</p>
         <p className="pokemon-weight">Weight: {pokemon.weight / 10} kg</p>
         <p className="pokemon-experience">Base Experience: {pokemon.base_experience}</p>
+        <button onClick={onDelete}>Delete</button>
       </div>
     </div>
   );

@@ -43,43 +43,44 @@
       ]
     },
     {
-      "name": "pikachu",
-      "id": 25,
-      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+      "name": "snorlax",
+      "id": 143,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
       "types": [
-        "electric"
+        "normal"
       ],
-      "height": 4,
-      "weight": 60,
-      "base_experience": 112,
+      "height": 21,
+      "weight": 4600,
+      "base_experience": 189,
       "abilities": [
-        "static",
-        "lightning-rod"
+        "immunity",
+        "thick-fat",
+        "gluttony"
       ],
       "stats": [
         {
           "name": "hp",
-          "value": 35
+          "value": 160
         },
         {
           "name": "attack",
-          "value": 55
+          "value": 110
         },
         {
           "name": "defense",
-          "value": 40
+          "value": 65
         },
         {
           "name": "special-attack",
-          "value": 50
+          "value": 65
         },
         {
           "name": "special-defense",
-          "value": 50
+          "value": 110
         },
         {
           "name": "speed",
-          "value": 90
+          "value": 30
         }
       ]
     },
