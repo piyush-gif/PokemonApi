@@ -19,6 +19,7 @@ const PokeDex = () => {
     <div>
       <div className='input'>
         <p>hello this is the PokeDex</p>
+        <p>Search a pokemon</p>
         <input/>
         <div className='pokemon-container'>
           {loading && <p> Loading ...</p>}
