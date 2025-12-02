@@ -6,28 +6,27 @@ const useFetch = (url) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
-    if (!url || url.endsWith('pokemon/')) return;
-    setLoading(true);
-    setError(null);
-    fetch(url)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch');
-        }
-        return res.json();
-      })
-      .then(data => {
+    const getData = async () => {
+      try{
+        if(!url || url.endsWith('pokemon/')) return;
+        setLoading(true);
+        setError(null);
+        const response = await fetch(url);
+        const data = await response.json();
         setData(data);
+      }
+      catch(error){
+        console.error(`There's an error ${error}.`);
+        setError(error.message);
+      }
+      finally{
         setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
+      }
+    }
+    getData();
   },[url]);
 
-  return { data, loading, error, setData};
+  return { data, loading, error};
 };
 
 export default useFetch;

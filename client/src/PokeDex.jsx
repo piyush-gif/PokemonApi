@@ -5,14 +5,6 @@ const PokeDex = () => {
 
 
   const handleDelete = async (id) =>{
-    setData(prev => prev.filter(p => p.id !== id));
-    try{
-      const res = await fetch(`http://localhost:3000/pokemons/${id}`, {method : 'DELETE'});
-      if(!res.ok) throw Error('Delete failed');
-    }
-    catch(err){
-      console.error(err);
-    }
   }
  
   return (
