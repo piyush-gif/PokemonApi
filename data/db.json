@@ -43,86 +43,43 @@
       ]
     },
     {
-      "name": "snorlax",
-      "id": 143,
-      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
+      "name": "pikachu",
+      "id": 25,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
       "types": [
-        "normal"
+        "electric"
       ],
-      "height": 21,
-      "weight": 4600,
-      "base_experience": 189,
+      "height": 4,
+      "weight": 60,
+      "base_experience": 112,
       "abilities": [
-        "immunity",
-        "thick-fat",
-        "gluttony"
+        "static",
+        "lightning-rod"
       ],
       "stats": [
         {
           "name": "hp",
-          "value": 160
+          "value": 35
         },
         {
           "name": "attack",
-          "value": 110
+          "value": 55
         },
         {
           "name": "defense",
-          "value": 65
+          "value": 40
         },
         {
           "name": "special-attack",
-          "value": 65
+          "value": 50
         },
         {
           "name": "special-defense",
-          "value": 110
+          "value": 50
         },
         {
           "name": "speed",
-          "value": 30
-        }
-      ]
-    },
-    {
-      "name": "dragonite",
-      "id": 149,
-      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
-      "types": [
-        "dragon",
-        "flying"
-      ],
-      "height": 22,
-      "weight": 2100,
-      "base_experience": 270,
-      "abilities": [
-        "inner-focus",
-        "multiscale"
-      ],
-      "stats": [
-        {
-          "name": "hp",
-          "value": 91
-        },
-        {
-          "name": "attack",
-          "value": 134
-        },
-        {
-          "name": "defense",
-          "value": 95
-        },
-        {
-          "name": "special-attack",
-          "value": 100
-        },
-        {
-          "name": "special-defense",
-          "value": 100
-        },
-        {
-          "name": "speed",
-          "value": 80
+          "value": 90
         }
       ]
     }
