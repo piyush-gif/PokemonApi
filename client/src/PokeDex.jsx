@@ -1,13 +1,21 @@
 import PokemonCard from './PokemonCard';
 import useFetch from './useFetch';
 import useRequest from './useRequest';
+import { useState , useEffect} from 'react';
 const PokeDex = () => {
   const {data, loading, error}  = useFetch('http://localhost:3000/pokemons');
   const {send, reLoading, reError} = useRequest();
+  const [pokemon, setPokemon] = useState([]);
 
   const handleDelete = async(id) =>{
-    await send(`http://localhost:3000/pokemons/${id}`)
-  }
+    await send(`http://localhost:3000/pokemons/${id}`, {method : "DELETE"});
+
+    setPokemon(data => data.filter(d => d.id !== id));
+  } 
+
+  useEffect(()  => {
+    if(data) setPokemon(data);
+  },[data]);
  
   return (
     <div>
@@ -18,11 +26,11 @@ const PokeDex = () => {
         <div className='pokemon-container'>
           {loading && <p> Loading ...</p>}
           {error && <p> error found!</p>}
-          {data?.map((pokemon) => ( 
+          {pokemon?.map((poke) => ( 
             <PokemonCard 
-              key={pokemon.id} 
-              pokemon={pokemon}
-              onDelete={() => handleDelete(pokemon.id)}
+              key={poke.id} 
+              pokemon={poke}
+              onDelete={() => handleDelete(poke.id)}
             />
           ))}
         </div>
