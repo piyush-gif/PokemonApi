@@ -1,11 +1,12 @@
 import PokemonCard from './PokemonCard';
 import useFetch from './useFetch';
+import useRequest from './useRequest';
 const PokeDex = () => {
-  const {data, loading, error, setData}  = useFetch('http://localhost:3000/pokemons');
+  const {data, loading, error}  = useFetch('http://localhost:3000/pokemons');
+  const {send, reLoading, reError} = useRequest();
 
-
-  const handleDelete = async (id) =>{
-    
+  const handleDelete = async(id) =>{
+    await send(`http://localhost:3000/pokemons/${id}`)
   }
  
   return (

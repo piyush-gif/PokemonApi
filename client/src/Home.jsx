@@ -73,7 +73,6 @@ const Home = () => {
         <button onClick={handleClick}>Search</button>
         <button 
           onClick={handleSave} 
-          disabled={!data || loading || error}
         >
           Save
         </button>

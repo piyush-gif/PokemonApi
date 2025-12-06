@@ -82,6 +82,47 @@
           "value": 90
         }
       ]
+    },
+    {
+      "name": "pichu",
+      "id": 172,
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/172.png",
+      "types": [
+        "electric"
+      ],
+      "height": 3,
+      "weight": 20,
+      "base_experience": 41,
+      "abilities": [
+        "static",
+        "lightning-rod"
+      ],
+      "stats": [
+        {
+          "name": "hp",
+          "value": 20
+        },
+        {
+          "name": "attack",
+          "value": 40
+        },
+        {
+          "name": "defense",
+          "value": 15
+        },
+        {
+          "name": "special-attack",
+          "value": 35
+        },
+        {
+          "name": "special-defense",
+          "value": 35
+        },
+        {
+          "name": "speed",
+          "value": 60
+        }
+      ]
     }
   ]
 }
