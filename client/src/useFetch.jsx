@@ -10,7 +10,7 @@ const useFetch = (url) => {
   useEffect(() => {
     const getData = async () => {
       try{
-        if(!url || url.endsWith('pokemon/')) return;
+        if(!url) return;
         setLoading(true);
         setError(null);
         const response = await fetch(url);

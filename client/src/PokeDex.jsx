@@ -9,7 +9,6 @@ const PokeDex = () => {
 
   const handleDelete = async(id) =>{
     await send(`http://localhost:3000/pokemons/${id}`, {method : "DELETE"});
-
     setPokemon(data => data.filter(d => d.id !== id));
   } 
 
