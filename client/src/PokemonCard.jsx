@@ -22,6 +22,7 @@ const PokemonCard = ({pokemon, onDelete}) => {
         <p className="pokemon-weight">Weight: {pokemon.weight / 10} kg</p>
         <p className="pokemon-experience">Base Experience: {pokemon.base_experience}</p>
         <button onClick={onDelete}>Delete</button>
+        <button onClick ={onFavourites}></button>
       </div>
     </div>
   );

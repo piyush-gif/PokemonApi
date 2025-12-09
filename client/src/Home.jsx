@@ -2,18 +2,19 @@ import { useState } from "react";
 import snorlax from "../public/images/snorlax.png";
 import useRequest from "./useRequest";
 
-
 const Home = () => {
   const [data, setData] = useState(null);
   const [loading , setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [name, setName] = useState("");
-  
+  const {send , reLoading, reError} = useRequest();
+
   const handleSearch = async (name) => {
+    if(name === "") return;
     setLoading(true);
     try{
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      if(!response.ok) throw Error("NO response from the server");
+      if(!response.ok) throw Error("No response from the server");
       const data = await response.json();
       setData(data);
       setError(false);
@@ -27,13 +28,26 @@ const Home = () => {
       setLoading(false);
     }
   }
-  const handleSave = (data) => {
-    const {send , reloading, reerror} = useRequest(`http://localhost:3000/pokemons/${id}`, {
+
+  const handleSave = async (data) => {
+    if (!data) return;
+    const pokemonToSave = {
+    id: data.id,
+    name: data.name,
+    sprite: data.sprites.front_default,
+    types: data.types.map(t => t.type.name),
+    height: data.height,
+    weight: data.weight,
+
+    base_experience: data.base_experience
+  };
+    await send (`http://localhost:3000/pokemons`, {
       method: "POST",
-      header : { "Content-Type":"application/json"},
-      body : JSON.stringify({data})
+      headers : { "Content-Type":"application/json"},
+      body : JSON.stringify(pokemonToSave)
     });
   }
+
   return(
     <div className="home-container">
       <div className="search-section">
@@ -47,16 +61,12 @@ const Home = () => {
           onChange={e => setName(e.target.value)}
         />
         <button onClick={() => handleSearch(name)}>Search</button>
-        <button 
-          onClick={() => handleSave(data)} 
-        >
-          Save
-        </button>
+        <button onClick={() => handleSave(data)}> {reLoading ? "Saving..." : "Save"}</button>
       </div>
       <div>
         {loading && <p>Loading...</p>}
         {error && <p>Pokemon not found!</p>}
-        
+        {reError && <p>Error saving data</p>}
         {data && (
           <div className="pokemon-card">
             <h2>{data.name} #{data.id}</h2>

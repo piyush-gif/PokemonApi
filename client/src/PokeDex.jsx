@@ -24,7 +24,7 @@ const PokeDex = () => {
         <input/>
         <div className='pokemon-container'>
           {loading && <p> Loading ...</p>}
-          {error && <p> error found!</p>}
+          {error && <p> Error found!</p>}
           {pokemon?.map((poke) => ( 
             <PokemonCard 
               key={poke.id} 
@@ -32,6 +32,8 @@ const PokeDex = () => {
               onDelete={() => handleDelete(poke.id)}
             />
           ))}
+          {reLoading && <p> unable to delete</p>}
+          {reError && <p> Error found!</p>}
         </div>
       </div>
     </div>

@@ -1,3 +1,27 @@
 {
-  "pokemons": []
+  "pokemons": [
+    {},
+    {
+      "id": 151,
+      "name": "mew",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+      "types": [
+        "psychic"
+      ],
+      "height": 4,
+      "weight": 40,
+      "base_experience": 270
+    },
+    {
+      "id": 150,
+      "name": "mewtwo",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+      "types": [
+        "psychic"
+      ],
+      "height": 20,
+      "weight": 1220,
+      "base_experience": 306
+    }
+  ]
 }
