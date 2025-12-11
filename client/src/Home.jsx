@@ -38,14 +38,14 @@ const Home = () => {
     types: data.types.map(t => t.type.name),
     height: data.height,
     weight: data.weight,
-
     base_experience: data.base_experience
   };
-    await send (`http://localhost:3000/pokemons`, {
+    const saved = await send (`http://localhost:3000/pokemons`, {
       method: "POST",
-      headers : { "Content-Type":"application/json"},
+      headers: { "Content-Type": "application/json" },
       body : JSON.stringify(pokemonToSave)
     });
+    console.log("Saved response:", saved);
   }
 
   return(
