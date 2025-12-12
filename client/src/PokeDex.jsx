@@ -8,8 +8,8 @@ const PokeDex = () => {
   const [pokemon, setPokemon] = useState([]);
 
   const handleDelete = async(id) =>{
-    await send(`http://localhost:3000/pokemons/${id}`, {method : "DELETE"});
     setPokemon(data => data.filter(d => d.id !== id));
+    await send(`http://localhost:3000/pokemons/${id}`, {method : "DELETE"});
   } 
 
   useEffect(()  => {
@@ -32,8 +32,8 @@ const PokeDex = () => {
               onDelete={() => handleDelete(poke.id)}
             />
           ))}
-          {reLoading && <p> unable to delete</p>}
-          {reError && <p> Error found!</p>}
+          {reLoading && <p> Deleting...</p>}
+          {reError && <p> Error Deleting!</p>}
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import snorlax from "../public/images/snorlax.png";
 import useRequest from "./useRequest";
 
 const Home = () => {
@@ -32,7 +31,7 @@ const Home = () => {
   const handleSave = async (data) => {
     if (!data) return;
     const pokemonToSave = {
-    id: data.id,
+    Pokemon_id: data.id,
     name: data.name,
     sprite: data.sprites.front_default,
     types: data.types.map(t => t.type.name),
@@ -51,9 +50,8 @@ const Home = () => {
   return(
     <div className="home-container">
       <div className="search-section">
-        <img className="snorlax" src={snorlax} alt="Snorlax"/>
+        <img className="snorlax" src="/images/snorlax.png" alt="Snorlax"/>
         <h1>Welcome to Pokemon World!</h1>
-        
         <p>Enter the pokemon name</p>
         <input 
           type="text" 

@@ -4,7 +4,7 @@ const PokemonCard = ({pokemon, onDelete}) => {
     <div className="pokedex-card">
       <div className="card-header">
         <h3 className="pokemon-name">{pokemon.name}</h3>
-        <span className="pokemon-id">#{pokemon.id}</span>
+        <span className="pokemon-id">#{pokemon.Pokemon_id}</span>
       </div>
       
       <div className="card-image">
@@ -22,7 +22,6 @@ const PokemonCard = ({pokemon, onDelete}) => {
         <p className="pokemon-weight">Weight: {pokemon.weight / 10} kg</p>
         <p className="pokemon-experience">Base Experience: {pokemon.base_experience}</p>
         <button onClick={onDelete}>Delete</button>
-        <button onClick ={onFavourites}></button>
       </div>
     </div>
   );
