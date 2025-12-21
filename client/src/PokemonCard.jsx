@@ -1,5 +1,4 @@
 const PokemonCard = ({pokemon, onDelete}) => {
-
   return ( 
     <div className="pokedex-card">
       <div className="card-header">

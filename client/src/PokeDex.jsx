@@ -6,6 +6,7 @@ const PokeDex = () => {
   const {data, loading, error}  = useFetch('http://localhost:3000/pokemons');
   const {send, reLoading, reError} = useRequest();
   const [pokemon, setPokemon] = useState([]);
+  
 
   const handleDelete = async(id) =>{
     setPokemon(data => data.filter(d => d.id !== id));
