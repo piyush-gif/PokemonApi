@@ -1,3 +1,28 @@
 {
-  "pokemons": []
+  "pokemons": [
+    {
+      "Pokemon_id": 289,
+      "name": "slaking",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/289.png",
+      "types": [
+        "normal"
+      ],
+      "height": 20,
+      "weight": 1305,
+      "base_experience": 252,
+      "id": 1
+    },
+    {
+      "Pokemon_id": 25,
+      "name": "pikachu",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+      "types": [
+        "electric"
+      ],
+      "height": 4,
+      "weight": 60,
+      "base_experience": 112,
+      "id": 2
+    }
+  ]
 }
