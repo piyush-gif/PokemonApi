@@ -8,6 +8,11 @@ const PokeDex = () => {
   const { send, reLoading, reError } = useRequest();
   const [pokemon, setPokemon] = useState([]);
   const { count, setCount } = useContext(CountContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 3;
+  const startPage = (currentPage - 1) * itemPerPage;
+  const endPage = startPage + itemPerPage;
+  const pagination = pokemon.slice(startPage, endPage);
 
   const handleDelete = async (id) => {
     setPokemon((data) => data.filter((d) => d.id !== id));
@@ -22,13 +27,29 @@ const PokeDex = () => {
   return (
     <div>
       <div className="input">
-        <p>hello this is the PokeDex</p>
+        <p>PokeDex</p>
         <p>Search a pokemon</p>
         <input />
+        <button
+          onClick={() => {
+            setCurrentPage((prev) => prev - 1);
+          }}
+          disabled={currentPage === 1}
+        >
+          previous
+        </button>
+        <button
+          onClick={() => {
+            setCurrentPage((prev) => prev + 1);
+          }}
+          disabled={endPage >= pokemon.length}
+        >
+          next
+        </button>
         <div className="pokemon-container">
           {loading && <p> Loading ...</p>}
           {error && <p> Error found!</p>}
-          {pokemon?.map((poke) => (
+          {pagination?.map((poke) => (
             <PokemonCard
               key={poke.id}
               pokemon={poke}

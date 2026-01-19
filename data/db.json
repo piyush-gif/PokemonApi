@@ -23,6 +23,31 @@
       "weight": 60,
       "base_experience": 112,
       "id": 2
+    },
+    {
+      "Pokemon_id": 6,
+      "name": "charizard",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
+      "types": [
+        "fire",
+        "flying"
+      ],
+      "height": 17,
+      "weight": 905,
+      "base_experience": 240,
+      "id": 4
+    },
+    {
+      "Pokemon_id": 143,
+      "name": "snorlax",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
+      "types": [
+        "normal"
+      ],
+      "height": 21,
+      "weight": 4600,
+      "base_experience": 189,
+      "id": 5
     }
   ]
 }
