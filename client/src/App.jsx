@@ -1,6 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import Home from "./Home";
+import "../style/homePage.css";
 const App = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 };
 export default App;
