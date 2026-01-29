@@ -1,7 +1,7 @@
 const NavBar = () => {
   return (
-    <div>
-      <div></div>
+    <div className="nav-container">
+      <div className="nav-container">links</div>
     </div>
   );
 };
