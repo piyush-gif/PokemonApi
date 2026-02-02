@@ -1,16 +1,29 @@
+import { useState, useEffect } from "react";
+
 const Home = () => {
+  const [name, setName] = useState("");
+  const [pokemon, setPokemon] = useState(null);
+
+  useEffect(() => {
+    const fetchapi = async () => {
+      const response = await fetch(
+        "https://pokeapi.co/api/v2/pokemon/charmander",
+      );
+      const data = await response.json();
+      setPokemon(data);
+      console.log(data.id);
+    };
+    fetchapi();
+  }, []);
+
   return (
     <>
-      <div className="home-container">
-        <button>Profile</button>
-        <button>Pokedex</button>
-        <button>Catch Pokemon</button>
-        <button>Battle</button>
-      </div>
-      <div className="home-container">
-        <button>Bag</button>
-        <button>Shop</button>
-        <button>Map</button>
+      <div>
+        <div>
+          <input value={name} onChange={(e) => setName(e.target.value)}></input>
+        </div>
+
+        {pokemon && <img src={pokemon.sprites.front_default}></img>}
       </div>
     </>
   );
