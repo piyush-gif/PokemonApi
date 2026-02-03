@@ -11,16 +11,26 @@ const Home = () => {
       );
       const data = await response.json();
       setPokemon(data);
-      console.log(data.id);
     };
     fetchapi();
   }, []);
+
+  const fetchPokemon = async () => {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${name}/`,
+      {},
+    );
+    const data = await response.json();
+    setPokemon(data);
+    console.log(data);
+  };
 
   return (
     <>
       <div>
         <div>
           <input value={name} onChange={(e) => setName(e.target.value)}></input>
+          <button onClick={fetchPokemon}>click</button>
         </div>
 
         {pokemon && <img src={pokemon.sprites.front_default}></img>}
