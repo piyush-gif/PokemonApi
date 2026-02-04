@@ -1,12 +1,17 @@
 import Home from "./Home";
 import NavBar from "./NavBar";
+import Pokedex from "./PokeDex";
 import "../style/homePage.css";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 const App = () => {
   return (
-    <div>
+    <BrowserRouter>
       <NavBar />
-      <Home />
-    </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/pokedex" element={<Pokedex />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 export default App;
