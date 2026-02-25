@@ -1,36 +1,20 @@
 import { useState, useEffect } from "react";
-
+import useFetch from "../hooks/useFetch";
 const Home = () => {
   const [name, setName] = useState("");
-  const [pokemon, setPokemon] = useState(null);
+  const { data: pokemon, loading, error, fetchData } = useFetch();
 
-  useEffect(() => {
-    const fetchapi = async () => {
-      const response = await fetch(
-        "https://pokeapi.co/api/v2/pokemon/charmander",
-      );
-      const data = await response.json();
-      setPokemon(data);
-    };
-    fetchapi();
-  }, []);
-
-  const fetchPokemon = async () => {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${name}/`,
-      {},
-    );
-    const data = await response.json();
-    setPokemon(data);
-    console.log(data);
+  const handleClick = () => {
+    fetchData(`https://pokeapi.co/api/v2/pokemon/${name}`);
   };
-
   return (
     <>
       <div>
         <div>
+          {loading && <p> loading...</p>}
+          {error && <p>{error}</p>}
           <input value={name} onChange={(e) => setName(e.target.value)}></input>
-          <button onClick={fetchPokemon}>click</button>
+          <button onClick={handleClick}>click</button>
         </div>
 
         {pokemon && <img src={pokemon.sprites.front_default}></img>}
