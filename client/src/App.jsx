@@ -2,7 +2,7 @@ import Home from "./Home";
 import NavBar from "./NavBar";
 import Pokedex from "./PokeDex";
 import "../style/homePage.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 const App = () => {
   return (
     <BrowserRouter>

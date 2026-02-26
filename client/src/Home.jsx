@@ -11,13 +11,12 @@ const Home = () => {
     <>
       <div>
         <div>
-          {loading && <p> loading...</p>}
-          {error && <p>{error}</p>}
           <input value={name} onChange={(e) => setName(e.target.value)}></input>
           <button onClick={handleClick}>click</button>
+          {loading && <p> loading...</p>}
+          {error && <p>{error}</p>}
+          {pokemon && <img src={pokemon.sprites.front_default}></img>}
         </div>
-
-        {pokemon && <img src={pokemon.sprites.front_default}></img>}
       </div>
     </>
   );
