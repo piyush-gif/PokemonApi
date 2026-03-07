@@ -6,7 +6,7 @@ const LoginPage = () => {
     password: "",
   });
 
-  const handleChnage = () => {
+  const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -20,16 +20,16 @@ const LoginPage = () => {
         <input
           name="username"
           value={form.username}
-          onChange={handleChnage}
+          onChange={handleChange}
           placeholder="username"
         ></input>
         <input
           name="password"
           value={form.password}
-          onChange={handleChnage}
+          onChange={handleChange}
           placeholder="password"
         ></input>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
