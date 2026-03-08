@@ -5,68 +5,26 @@ const useFetch = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (url, options = {}) => {
+  const handlePost = async (url, body) => {
+    setLoading(true);
+    setError("");
     try {
-      setError("");
-      setLoading(true);
-      const response = await fetch(url);
-      if (!response.ok)
-        throw new Error("Couldn't get a response from the server");
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) throw new Error("Server failed to respond");
       const data = await response.json();
       setData(data);
+      console.log(data);
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
-
-  const postData = async (url, options = {}) => {
-    try {
-      setError("");
-      setLoading(true);
-      const response = await fetch(url, {
-        ...options,
-      });
-      if (!response.ok) throw new Error("Couldn't connect with the server");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const updateData = async (url, options = {}) => {
-    try {
-      setError("");
-      setLoading(true);
-      const response = await fetch(url, {
-        ...options,
-      });
-      if (!response.ok) throw new Error("Couldn't connect with the server");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const deleteData = async (url, id) => {
-    try {
-      setError("");
-      setLoading(true);
-      const response = await fetch(`${url}/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) throw new Error("Couldn't connect with the server");
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return { data, loading, error, fetchData, postData, updateData, deleteData };
+  return { data, error, setError, loading, handlePost };
 };
 
 export default useFetch;
