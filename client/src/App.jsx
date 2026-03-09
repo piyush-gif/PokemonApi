@@ -5,6 +5,10 @@ import "../style/homePage.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import Register from "./Register";
+import "../style/Register.css";
+import "../style/index.css";
+import "../style/login.css";
+import "../style/NavBar.css";
 const App = () => {
   return (
     <BrowserRouter>

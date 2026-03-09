@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [form, setForm] = useState({
     username: "",
@@ -7,8 +8,14 @@ const Register = () => {
     password: "",
     checkpassword: "",
   });
-
+  const navigate = useNavigate();
   const { data, loading, error, setError, handlePost } = useFetch();
+
+  useEffect(() => {
+    if (data?.message) {
+      navigate("/login");
+    }
+  }, [data]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -43,13 +50,14 @@ const Register = () => {
       password: form.password,
     };
 
-    handlePost("http://127.0.0.1:8000/register", body);
+    handlePost("http://localhost:8000/register", body);
   };
   return (
-    <div>
-      {error && <div>{error}</div>}
-      {loading && <p> Loading...</p>}
-      <div>
+    <div className="register-page">
+      <div className="register-card">
+        {error && <div>{error}</div>}
+        {loading && <p> Loading...</p>}
+
         <form onSubmit={handleSubmit}>
           <input
             value={form.username}

@@ -13,8 +13,13 @@ const useFetch = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
+        credentials: "include",
       });
-      if (!response.ok) throw new Error("Server failed to respond");
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Server failed to respond");
+      }
+
       const data = await response.json();
       setData(data);
       console.log(data);
