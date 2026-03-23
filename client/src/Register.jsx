@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import useAuthStore from "./store/authStore";
 const Register = () => {
+  const { user } = useAuthStore();
+  if (user) {
+    return <Navigate to="/" />;
+  }
   const [form, setForm] = useState({
     username: "",
     email: "",

@@ -19,17 +19,39 @@ const useFetch = () => {
         const errorData = await response.json();
         throw new Error(errorData.detail || "Server failed to respond");
       }
-
       const data = await response.json();
       setData(data);
-      console.log(data);
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
-  return { data, error, setError, loading, handlePost };
+
+  const handleGet = async (url) => {
+    setLoading(true);
+    setError("");
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include",
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Server failed to respond");
+      }
+      const data = await response.json();
+      setData(data);
+      return data;
+    } catch (error) {
+      setError(error.message);
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { data, error, setError, loading, handlePost, handleGet };
 };
 
 export default useFetch;
