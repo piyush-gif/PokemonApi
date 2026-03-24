@@ -2,6 +2,36 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
+const TYPE_COLORS = {
+  fire: "bg-orange-500/20 text-orange-400 border-orange-500",
+  water: "bg-blue-500/20 text-blue-400 border-blue-500",
+  grass: "bg-green-500/20 text-green-400 border-green-500",
+  electric: "bg-yellow-400/20 text-yellow-300 border-yellow-400",
+  ice: "bg-cyan-400/20 text-cyan-300 border-cyan-400",
+  fighting: "bg-red-700/20 text-red-400 border-red-700",
+  poison: "bg-purple-500/20 text-purple-400 border-purple-500",
+  ground: "bg-amber-600/20 text-amber-400 border-amber-600",
+  flying: "bg-sky-400/20 text-sky-300 border-sky-400",
+  psychic: "bg-pink-500/20 text-pink-400 border-pink-500",
+  bug: "bg-lime-500/20 text-lime-400 border-lime-500",
+  rock: "bg-stone-500/20 text-stone-400 border-stone-500",
+  ghost: "bg-violet-700/20 text-violet-400 border-violet-700",
+  dragon: "bg-indigo-500/20 text-indigo-400 border-indigo-500",
+  dark: "bg-neutral-700/20 text-neutral-400 border-neutral-700",
+  steel: "bg-slate-400/20 text-slate-300 border-slate-400",
+  normal: "bg-gray-400/20 text-gray-300 border-gray-400",
+  fairy: "bg-pink-300/20 text-pink-300 border-pink-300",
+};
+
+const STAT_COLORS = {
+  hp: "bg-green-500",
+  attack: "bg-red-500",
+  defense: "bg-blue-500",
+  "special-attack": "bg-purple-500",
+  "special-defense": "bg-cyan-500",
+  speed: "bg-yellow-400",
+};
+
 const PokemonDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -17,58 +47,140 @@ const PokemonDetail = () => {
     fetchPokemon();
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-[#aba9b9] font-label uppercase tracking-widest">
+          Loading...
+        </p>
+      </div>
+    );
+  if (error)
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-400">{error}</p>
+      </div>
+    );
   if (!pokemon) return null;
 
   return (
-    <div className="pokemon-detail-page">
-      <button onClick={() => navigate("/pokedex")}>Back</button>
-      <div className="pokemon-detail-card">
-        <img src={pokemon.sprite} alt={pokemon.name} />
-        <h1>
-          #{pokemon.id}{" "}
-          {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-        </h1>
-        <div className="pokemon-types">
-          {pokemon.types.map((t) => (
-            <span key={t} className={`type ${t}`}>
-              {t.charAt(0).toUpperCase() + t.slice(1)}
-            </span>
-          ))}
-        </div>
-        <div className="pokemon-info">
-          <p>Height: {pokemon.height / 10}m</p>
-          <p>Weight: {pokemon.weight / 10}kg</p>
-          <p>Base Experience: {pokemon.base_experience}</p>
-        </div>
-        <div className="pokemon-stats">
-          <h2>Stats</h2>
-          {Object.entries(pokemon.stats).map(([stat, value]) => (
-            <div key={stat} className="stat-row">
-              <span>{stat.toUpperCase()}</span>
-              <div className="stat-bar">
-                <div
-                  className="stat-fill"
-                  style={{ width: `${(value / 255) * 100}%` }}
-                />
-              </div>
-              <span>{value}</span>
+    <div className="min-h-screen px-6 py-10 max-w-screen-xl mx-auto">
+      {/* Back Button */}
+      <button
+        onClick={() => navigate("/pokedex")}
+        className="flex items-center gap-2 text-[#aba9b9] hover:text-white transition-colors font-label uppercase text-sm tracking-wider mb-8"
+      >
+        <span className="material-symbols-outlined text-sm">arrow_back</span>
+        Back to Pokedex
+      </button>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {/* Left Column — Sprite + Basic Info */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-3xl p-10 w-full flex flex-col items-center gap-4">
+            <img
+              src={pokemon.sprite}
+              alt={pokemon.name}
+              className="w-48 h-48 object-contain"
+            />
+            <p className="text-[#aba9b9] font-label text-sm">#{pokemon.id}</p>
+            <h1 className="text-4xl font-headline font-bold text-white uppercase tracking-tighter">
+              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            </h1>
+            {/* Types */}
+            <div className="flex gap-2 flex-wrap justify-center">
+              {pokemon.types.map((t) => (
+                <span
+                  key={t}
+                  className={`px-4 py-1 rounded-full text-xs font-label font-black uppercase tracking-wider border-l-2 ${TYPE_COLORS[t] || "bg-gray-500/20 text-gray-400 border-gray-500"}`}
+                >
+                  {t.charAt(0).toUpperCase() + t.slice(1)}
+                </span>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="pokemon-abilities">
-          <h2>Abilities</h2>
-          {pokemon.abilities.map((a) => (
-            <span key={a}>{a.charAt(0).toUpperCase() + a.slice(1)}</span>
-          ))}
-        </div>
-        <div className="pokemon-moves">
-          <h2>Moves</h2>
-          <div className="moves-grid">
-            {pokemon.moves.slice(0, 20).map((m) => (
-              <span key={m}>{m.charAt(0).toUpperCase() + m.slice(1)}</span>
+          </div>
+
+          {/* Info Row */}
+          <div className="grid grid-cols-3 gap-4 w-full">
+            {[
+              { label: "Height", value: `${pokemon.height / 10}m` },
+              { label: "Weight", value: `${pokemon.weight / 10}kg` },
+              { label: "Base EXP", value: pokemon.base_experience },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="bg-[#1e1e2d] border border-[#474754]/20 rounded-2xl p-4 flex flex-col items-center gap-1"
+              >
+                <span className="text-[#aba9b9] text-xs font-label uppercase tracking-widest">
+                  {item.label}
+                </span>
+                <span className="text-white font-headline font-bold text-lg">
+                  {item.value}
+                </span>
+              </div>
             ))}
+          </div>
+
+          {/* Abilities */}
+          <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-2xl p-6 w-full">
+            <h2 className="text-white font-headline font-bold uppercase tracking-tight mb-4">
+              Abilities
+            </h2>
+            <div className="flex gap-2 flex-wrap">
+              {pokemon.abilities.map((a) => (
+                <span
+                  key={a}
+                  className="px-3 py-1 bg-[#242434] border border-[#474754]/30 rounded-lg text-[#aba9b9] text-sm font-label"
+                >
+                  {a.charAt(0).toUpperCase() + a.slice(1)}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column — Stats + Moves */}
+        <div className="flex flex-col gap-6">
+          {/* Stats */}
+          <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-2xl p-6">
+            <h2 className="text-white font-headline font-bold uppercase tracking-tight mb-6">
+              Base Stats
+            </h2>
+            <div className="flex flex-col gap-4">
+              {Object.entries(pokemon.stats).map(([stat, value]) => (
+                <div key={stat} className="flex items-center gap-4">
+                  <span className="text-[#aba9b9] text-xs font-label uppercase tracking-wider w-28 shrink-0">
+                    {stat.replace("-", " ")}
+                  </span>
+                  <div className="flex-1 h-2 bg-[#242434] rounded-full overflow-hidden">
+                    <div
+                      className={`h-full rounded-full transition-all duration-700 ${STAT_COLORS[stat] || "bg-red-500"}`}
+                      style={{ width: `${(value / 255) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-white font-headline font-bold text-sm w-8 text-right">
+                    {value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Moves */}
+          <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-2xl p-6">
+            <h2 className="text-white font-headline font-bold uppercase tracking-tight mb-4">
+              Moves
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {pokemon.moves.slice(0, 20).map((m) => (
+                <span
+                  key={m}
+                  className="px-3 py-1.5 bg-[#242434] border border-[#474754]/30 rounded-lg text-[#aba9b9] text-xs font-label text-center"
+                >
+                  {m.charAt(0).toUpperCase() + m.slice(1)}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

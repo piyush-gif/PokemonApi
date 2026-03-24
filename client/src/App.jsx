@@ -2,14 +2,9 @@ import { useEffect } from "react";
 import Home from "./Home";
 import NavBar from "./NavBar";
 import Pokedex from "./PokeDex";
-import "../style/homePage.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import Register from "./Register";
-import "../style/Register.css";
-import "../style/index.css";
-import "../style/login.css";
-import "../style/NavBar.css";
 import useFetch from "../hooks/useFetch";
 import useAuthStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -34,14 +29,7 @@ const App = () => {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/pokedex"
-          element={
-            <ProtectedRoute>
-              <Pokedex />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/pokedex/:id" element={<PokemonDetail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
