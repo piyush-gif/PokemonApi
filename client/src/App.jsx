@@ -13,6 +13,7 @@ import "../style/NavBar.css";
 import useFetch from "../hooks/useFetch";
 import useAuthStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PokemonDetail from "./PokemonDetail";
 
 const App = () => {
   const { handleGet } = useFetch();
@@ -41,6 +42,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route path="/pokedex/:id" element={<PokemonDetail />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<Register />} />
       </Routes>
