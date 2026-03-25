@@ -5,21 +5,25 @@ import Pokedex from "./PokeDex";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import Register from "./Register";
-import useFetch from "../hooks/useFetch";
 import useAuthStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PokemonDetail from "./PokemonDetail";
 
 const App = () => {
-  const { handleGet } = useFetch();
   const { setUser } = useAuthStore();
 
   useEffect(() => {
     const checkAuth = async () => {
-      const data = await handleGet("http://localhost:8000/me");
-      if (data) {
-        setUser(data);
-      }
+      try {
+        const response = await fetch("http://localhost:8000/me", {
+          method: "GET",
+          credentials: "include",
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data);
+        }
+      } catch (e) {}
     };
     checkAuth();
   }, []);
