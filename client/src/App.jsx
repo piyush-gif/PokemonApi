@@ -8,6 +8,7 @@ import Register from "./Register";
 import useAuthStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PokemonDetail from "./PokemonDetail";
+import Profile from "./Profile";
 
 const App = () => {
   const { setUser } = useAuthStore();
@@ -32,6 +33,14 @@ const App = () => {
     <BrowserRouter>
       <NavBar />
       <Routes>
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/" element={<Home />} />
         <Route path="/pokedex" element={<Pokedex />} />
         <Route path="/pokedex/:id" element={<PokemonDetail />} />
