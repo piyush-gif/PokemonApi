@@ -46,7 +46,7 @@ const Profile = () => {
         <div className="absolute top-0 right-0 p-6 z-10">
           <button
             onClick={handleLogout}
-            className="bg-red-900/40 text-red-400 font-headline font-bold px-6 py-2 rounded-xl uppercase tracking-widest text-xs hover:bg-red-600 hover:text-white transition-colors active:scale-95"
+            className="bg-red-500/10 text-red-400 font-headline font-bold px-6 py-2 rounded-xl uppercase tracking-widest text-xs border border-red-500/20 hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-200"
           >
             LOGOUT
           </button>

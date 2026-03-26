@@ -9,6 +9,9 @@ import useAuthStore from "./store/authStore";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PokemonDetail from "./PokemonDetail";
 import Profile from "./Profile";
+import Explore from "./Explore";
+
+// inside Routes:
 
 const App = () => {
   const { setUser } = useAuthStore();
@@ -38,6 +41,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/explore"
+          element={
+            <ProtectedRoute>
+              <Explore />
             </ProtectedRoute>
           }
         />
