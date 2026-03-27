@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuthStore from "./store/authStore";
 import useFetch from "../hooks/useFetch";
@@ -25,24 +26,41 @@ const TYPE_COLORS = {
 
 const Profile = () => {
   const { user, clearUser } = useAuthStore();
-  const { handlePost } = useFetch();
+  const { handleGet } = useFetch();
   const navigate = useNavigate();
+  const [caughtPokemon, setCaughtPokemon] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const collectionData = await handleGet(
+        "http://localhost:8000/explore/collection",
+      );
+      if (collectionData?.collection)
+        setCaughtPokemon(collectionData.collection);
+
+      const favData = await handleGet(
+        "http://localhost:8000/explore/favorites",
+      );
+      if (favData?.favorites) setFavorites(favData.favorites);
+    };
+    fetchData();
+  }, []);
   const handleLogout = async () => {
-    await handlePost("http://localhost:8000/logout");
+    try {
+      await fetch("http://localhost:8000/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (e) {}
     clearUser();
     navigate("/login");
   };
-
-  // placeholder empty collections for now
-  const caughtPokemon = [];
-  const favorites = [];
 
   return (
     <div className="min-h-screen pb-24 pt-6 px-4 md:px-8 max-w-7xl mx-auto space-y-12">
       {/* Trainer Header */}
       <section className="relative overflow-hidden rounded-3xl bg-[#12121e] p-8 border border-white/5">
-        {/* Logout button */}
         <div className="absolute top-0 right-0 p-6 z-10">
           <button
             onClick={handleLogout}
@@ -53,7 +71,6 @@ const Profile = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
-          {/* Avatar */}
           <div className="relative">
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-red-400 to-red-600 p-1 shadow-[0_0_40px_rgba(255,141,140,0.2)]">
               <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
@@ -67,7 +84,6 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* Info */}
           <div className="text-center md:text-left space-y-2">
             <h2 className="text-5xl md:text-6xl font-headline font-black tracking-tighter text-white uppercase italic">
               {user?.username}
@@ -83,7 +99,6 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Decorative background text */}
         <div className="absolute -bottom-10 -right-10 opacity-5 font-headline font-black text-9xl italic pointer-events-none select-none">
           ARCHIVE
         </div>
@@ -166,8 +181,11 @@ const Profile = () => {
                   src={p.sprite}
                   alt={p.name}
                   className="w-20 h-20 object-contain group-hover:scale-110 transition-transform duration-300"
+                  style={{ imageRendering: "pixelated" }}
                 />
-                <p className="text-[#aba9b9] text-xs font-label">#{p.id}</p>
+                <p className="text-[#aba9b9] text-xs font-label">
+                  #{p.pokemon_id}
+                </p>
                 <h3 className="text-white font-headline font-bold text-sm uppercase tracking-tight text-center">
                   {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
                 </h3>
@@ -217,8 +235,11 @@ const Profile = () => {
                   src={p.sprite}
                   alt={p.name}
                   className="w-20 h-20 object-contain group-hover:scale-110 transition-transform duration-300"
+                  style={{ imageRendering: "pixelated" }}
                 />
-                <p className="text-[#aba9b9] text-xs font-label">#{p.id}</p>
+                <p className="text-[#aba9b9] text-xs font-label">
+                  #{p.pokemon_id}
+                </p>
                 <h3 className="text-white font-headline font-bold text-sm uppercase tracking-tight text-center">
                   {p.name.charAt(0).toUpperCase() + p.name.slice(1)}
                 </h3>

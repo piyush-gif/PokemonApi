@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 
@@ -58,6 +58,16 @@ const Explore = () => {
   const [recentLogs, setRecentLogs] = useState([]);
   const { handleGet, handlePost, loading, error } = useFetch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEncounterCount = async () => {
+      const data = await handleGet(
+        "http://localhost:8000/explore/encounter-status",
+      );
+      if (data) setEncountersRemaining(data.encounters_remaining);
+    };
+    fetchEncounterCount();
+  }, []);
 
   const handleRegionSelect = async (region) => {
     setSelectedRegion(region);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
+import useAuthStore from "./store/authStore";
 
 const TYPE_COLORS = {
   fire: "bg-orange-500/20 text-orange-400 border-orange-500",
@@ -36,16 +37,62 @@ const PokemonDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { handleGet, loading, error } = useFetch();
+  const { user } = useAuthStore();
   const [pokemon, setPokemon] = useState(null);
+  const [isCaught, setIsCaught] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+  const [favLoading, setFavLoading] = useState(false);
 
   const fetchPokemon = async () => {
     const data = await handleGet(`http://localhost:8000/pokedex/${id}`);
     if (data) setPokemon(data);
   };
 
+  const checkCaughtAndFavorite = async () => {
+    if (!user) return;
+
+    const collection = await handleGet(
+      "http://localhost:8000/explore/collection",
+    );
+    if (collection?.collection) {
+      const caught = collection.collection.find(
+        (p) => p.pokemon_id === parseInt(id),
+      );
+      setIsCaught(!!caught);
+    }
+
+    const favs = await handleGet("http://localhost:8000/explore/favorites");
+    if (favs?.favorites) {
+      const fav = favs.favorites.find((p) => p.pokemon_id === parseInt(id));
+      setIsFavorited(!!fav);
+    }
+  };
+
   useEffect(() => {
     fetchPokemon();
+    checkCaughtAndFavorite();
   }, [id]);
+
+  const handleFavorite = async () => {
+    if (!user || !isCaught) return;
+    setFavLoading(true);
+    try {
+      if (isFavorited) {
+        await fetch(`http://localhost:8000/explore/favorite/${id}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+        setIsFavorited(false);
+      } else {
+        await fetch(`http://localhost:8000/explore/favorite/${id}`, {
+          method: "POST",
+          credentials: "include",
+        });
+        setIsFavorited(true);
+      }
+    } catch (e) {}
+    setFavLoading(false);
+  };
 
   if (loading)
     return (
@@ -75,18 +122,20 @@ const PokemonDetail = () => {
       </button>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* Left Column — Sprite + Basic Info */}
+        {/* Left Column */}
         <div className="flex flex-col items-center gap-6">
           <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-3xl p-10 w-full flex flex-col items-center gap-4">
             <img
               src={pokemon.sprite}
               alt={pokemon.name}
               className="w-48 h-48 object-contain"
+              style={{ imageRendering: "pixelated" }}
             />
             <p className="text-[#aba9b9] font-label text-sm">#{pokemon.id}</p>
             <h1 className="text-4xl font-headline font-bold text-white uppercase tracking-tighter">
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
             </h1>
+
             {/* Types */}
             <div className="flex gap-2 flex-wrap justify-center">
               {pokemon.types.map((t) => (
@@ -98,6 +147,57 @@ const PokemonDetail = () => {
                 </span>
               ))}
             </div>
+
+            {/* Favorite Button — only show if logged in and caught */}
+            {user && isCaught && (
+              <button
+                onClick={handleFavorite}
+                disabled={favLoading}
+                className={`flex items-center gap-2 px-6 py-2 rounded-xl font-label font-bold uppercase text-xs tracking-wider transition-all duration-200 ${
+                  isFavorited
+                    ? "bg-pink-500/20 text-pink-400 border border-pink-500/30 hover:bg-pink-500/30"
+                    : "bg-[#242434] text-[#aba9b9] border border-[#474754]/30 hover:border-pink-500/30 hover:text-pink-400"
+                }`}
+              >
+                <span
+                  className="material-symbols-outlined text-base"
+                  style={{
+                    fontVariationSettings: isFavorited
+                      ? "'FILL' 1"
+                      : "'FILL' 0",
+                  }}
+                >
+                  favorite
+                </span>
+                {isFavorited ? "Favorited" : "Add to Favorites"}
+              </button>
+            )}
+
+            {/* Caught badge */}
+            {user && isCaught && (
+              <div className="flex items-center gap-2 text-green-400 text-xs font-label uppercase tracking-wider">
+                <span
+                  className="material-symbols-outlined text-sm"
+                  style={{ fontVariationSettings: "'FILL' 1" }}
+                >
+                  check_circle
+                </span>
+                In your collection
+              </div>
+            )}
+
+            {/* Not caught — prompt to explore */}
+            {user && !isCaught && (
+              <button
+                onClick={() => navigate("/explore")}
+                className="flex items-center gap-2 text-[#aba9b9] text-xs font-label uppercase tracking-wider hover:text-red-400 transition-colors"
+              >
+                <span className="material-symbols-outlined text-sm">
+                  travel_explore
+                </span>
+                Not caught yet — Go explore!
+              </button>
+            )}
           </div>
 
           {/* Info Row */}
@@ -139,7 +239,7 @@ const PokemonDetail = () => {
           </div>
         </div>
 
-        {/* Right Column — Stats + Moves */}
+        {/* Right Column */}
         <div className="flex flex-col gap-6">
           {/* Stats */}
           <div className="bg-[#1e1e2d] border border-[#474754]/20 rounded-2xl p-6">
