@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import PokemonDetail from "./PokemonDetail";
 import Profile from "./Profile";
 import Explore from "./Explore";
+import Battle from "./components/Battle";
 
 // inside Routes:
 
@@ -49,6 +50,14 @@ const App = () => {
           element={
             <ProtectedRoute>
               <Explore />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/battle"
+          element={
+            <ProtectedRoute>
+              <Battle />
             </ProtectedRoute>
           }
         />
