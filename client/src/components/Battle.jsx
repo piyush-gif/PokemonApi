@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import BattleBag from "./BattleBag";
 
 const TYPE_COLORS = {
   rock: "bg-stone-500/20 text-stone-400 border-stone-500",
@@ -69,6 +70,7 @@ const Battle = () => {
   const [selectedPokemon, setSelectedPokemon] = useState([]);
   const [battleState, setBattleState] = useState(null);
   const [battleLoading, setBattleLoading] = useState(false);
+  const [showBag, setShowBag] = useState(false);
 
   useEffect(() => {
     fetchGyms();
@@ -93,7 +95,6 @@ const Battle = () => {
   };
 
   const fetchCollection = async () => {
-    // Fixed: was hitting /explore/collection which doesn't exist
     const data = await handleGet("http://localhost:8000/explore/collection");
     if (data?.collection) setCollection(data.collection);
   };
@@ -133,15 +134,8 @@ const Battle = () => {
     if (!battleState || battleLoading) return;
     setBattleLoading(true);
     const data = await handlePost("http://localhost:8000/battle/move", {
-      gym_id: battleState.gym_id,
-      player_team: battleState.player_team,
-      gym_team: battleState.gym_team,
-      active_player_index: battleState.active_player_index,
-      active_gym_index: battleState.active_gym_index,
-      potions_used: battleState.potions_used,
       action: "move",
       move_index: moveIndex,
-      log: battleState.log.slice(-20), // Trim log to avoid oversized payloads
     });
     if (data) {
       setBattleState(data);
@@ -157,14 +151,7 @@ const Battle = () => {
     if (!battleState || battleLoading) return;
     setBattleLoading(true);
     const data = await handlePost("http://localhost:8000/battle/move", {
-      gym_id: battleState.gym_id,
-      player_team: battleState.player_team,
-      gym_team: battleState.gym_team,
-      active_player_index: battleState.active_player_index,
-      active_gym_index: battleState.active_gym_index,
-      potions_used: battleState.potions_used,
       action: "potion",
-      log: battleState.log.slice(-20),
     });
     if (data) {
       setBattleState(data);
@@ -174,6 +161,16 @@ const Battle = () => {
       }
     }
     setBattleLoading(false);
+  };
+
+  const handleSwitch = async (index) => {
+    const data = await handlePost("http://localhost:8000/battle/switch", {
+      switch_index: index,
+    });
+    if (data) {
+      setBattleState(data);
+    }
+    setShowBag(false);
   };
 
   const handleReset = () => {
@@ -473,6 +470,14 @@ const Battle = () => {
       battleState.player_team[battleState.active_player_index];
     const gymPokemon = battleState.gym_team[battleState.active_gym_index];
 
+    // Guard — if battle is over redirect to result
+    if (!playerPokemon || !gymPokemon || battleState.battle_over) {
+      if (battleState.battle_over) {
+        setScreen(SCREEN.RESULT);
+      }
+      return null;
+    }
+
     return (
       <div className="h-screen pt-16 pb-20 flex flex-col overflow-hidden bg-black">
         <div className="flex-grow relative bg-gradient-to-b from-slate-900 to-black overflow-hidden">
@@ -540,7 +545,13 @@ const Battle = () => {
                 {battleState.player_team.map((p, i) => (
                   <span
                     key={i}
-                    className={`w-2 h-2 rounded-full ${p.current_hp > 0 ? (i === battleState.active_player_index ? "bg-red-400" : "bg-green-400") : "bg-[#474754]"}`}
+                    className={`w-2 h-2 rounded-full ${
+                      p.current_hp > 0
+                        ? i === battleState.active_player_index
+                          ? "bg-red-400"
+                          : "bg-green-400"
+                        : "bg-[#474754]"
+                    }`}
                   />
                 ))}
               </div>
@@ -599,19 +610,17 @@ const Battle = () => {
             )}
           </div>
 
-          {/* Potion + Forfeit */}
+          {/* Bag + Forfeit */}
           <div className="md:col-span-2 flex flex-col gap-2">
             <button
-              onClick={handlePotion}
-              disabled={battleLoading || battleState.potions_used >= 3}
-              className="flex-1 py-3 px-4 bg-[#1e1e2d] hover:bg-[#2b2a3c] text-white font-label font-bold rounded-xl border border-[#474754]/30 flex items-center justify-center gap-2 transition-colors active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => setShowBag(true)}
+              disabled={battleLoading}
+              className="flex-1 py-3 px-4 bg-[#1e1e2d] hover:bg-[#2b2a3c] text-white font-label font-bold rounded-xl border border-[#474754]/30 flex items-center justify-center gap-2 transition-colors active:scale-95 disabled:opacity-50"
             >
-              <span className="material-symbols-outlined text-blue-400">
-                medical_services
+              <span className="material-symbols-outlined text-yellow-400">
+                backpack
               </span>
-              <span className="text-xs uppercase tracking-wider">
-                Potion ({3 - battleState.potions_used}/3)
-              </span>
+              <span className="text-xs uppercase tracking-wider">Bag</span>
             </button>
             <button
               onClick={handleReset}
@@ -621,6 +630,21 @@ const Battle = () => {
             </button>
           </div>
         </div>
+
+        {/* Bag Popup */}
+        {showBag && (
+          <BattleBag
+            playerTeam={battleState.player_team}
+            activeIndex={battleState.active_player_index}
+            potionsUsed={battleState.potions_used}
+            onSwitch={handleSwitch}
+            onPotion={() => {
+              handlePotion();
+              setShowBag(false);
+            }}
+            onClose={() => setShowBag(false)}
+          />
+        )}
       </div>
     );
   }
@@ -630,19 +654,31 @@ const Battle = () => {
     const won = battleState.winner === "player";
     return (
       <div
-        className={`min-h-screen flex flex-col items-center justify-center gap-8 px-4 ${won ? "bg-gradient-to-b from-yellow-900/20 to-[#0d0d18]" : "bg-gradient-to-b from-red-900/20 to-[#0d0d18]"}`}
+        className={`min-h-screen flex flex-col items-center justify-center gap-8 px-4 ${
+          won
+            ? "bg-gradient-to-b from-yellow-900/20 to-[#0d0d18]"
+            : "bg-gradient-to-b from-red-900/20 to-[#0d0d18]"
+        }`}
       >
         <div
-          className={`w-full max-w-md p-10 rounded-3xl border flex flex-col items-center gap-6 text-center ${won ? "bg-yellow-500/10 border-yellow-500/30" : "bg-red-900/10 border-red-900/30"}`}
+          className={`w-full max-w-md p-10 rounded-3xl border flex flex-col items-center gap-6 text-center ${
+            won
+              ? "bg-yellow-500/10 border-yellow-500/30"
+              : "bg-red-900/10 border-red-900/30"
+          }`}
         >
           <span
-            className={`material-symbols-outlined text-8xl ${won ? "text-yellow-400" : "text-red-600"}`}
+            className={`material-symbols-outlined text-8xl ${
+              won ? "text-yellow-400" : "text-red-600"
+            }`}
             style={{ fontVariationSettings: "'FILL' 1" }}
           >
             {won ? "emoji_events" : "sentiment_very_dissatisfied"}
           </span>
           <h2
-            className={`text-5xl font-headline font-black uppercase tracking-tighter ${won ? "text-yellow-400" : "text-red-400"}`}
+            className={`text-5xl font-headline font-black uppercase tracking-tighter ${
+              won ? "text-yellow-400" : "text-red-400"
+            }`}
           >
             {won ? "Victory!" : "Defeated!"}
           </h2>
@@ -669,7 +705,7 @@ const Battle = () => {
           <p className="text-[#aba9b9] font-body text-sm">
             {won
               ? `You defeated ${selectedGym.name}!`
-              : `${selectedGym.name} was too strong. Train harder and try again!`}
+              : `${selectedGym.name} was too strong. Try again!`}
           </p>
         </div>
         <button
