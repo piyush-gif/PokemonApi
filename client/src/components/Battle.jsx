@@ -638,8 +638,8 @@ const Battle = () => {
             activeIndex={battleState.active_player_index}
             potionsUsed={battleState.potions_used}
             onSwitch={handleSwitch}
-            onPotion={() => {
-              handlePotion();
+            onPotion={async () => {
+              await handlePotion();
               setShowBag(false);
             }}
             onClose={() => setShowBag(false)}

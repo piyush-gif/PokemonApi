@@ -45,6 +45,12 @@ const NavBar = () => {
             >
               Battle
             </Link>
+            <Link
+              to="/shop"
+              className="text-slate-400 font-medium hover:text-white transition-colors font-headline uppercase text-sm tracking-wider"
+            >
+              Shop
+            </Link>
           </nav>
 
           {/* Auth */}

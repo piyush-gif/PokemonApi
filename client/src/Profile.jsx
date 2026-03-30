@@ -30,7 +30,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const [caughtPokemon, setCaughtPokemon] = useState([]);
   const [favorites, setFavorites] = useState([]);
-
+  const [battlesWon, setBattlesWon] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
       const collectionData = await handleGet(
@@ -43,6 +43,11 @@ const Profile = () => {
         "http://localhost:8000/explore/favorites",
       );
       if (favData?.favorites) setFavorites(favData.favorites);
+
+      const progressData = await handleGet(
+        "http://localhost:8000/battle/progress",
+      );
+      if (progressData) setBattlesWon(progressData.badges.length);
     };
     fetchData();
   }, []);
@@ -137,7 +142,9 @@ const Profile = () => {
             <p className="font-label text-xs uppercase tracking-widest text-[#aba9b9]">
               Battles Won
             </p>
-            <p className="font-headline font-black text-5xl text-white">0</p>
+            <p className="font-headline font-black text-5xl text-white">
+              {battlesWon}
+            </p>
           </div>
           <span className="material-symbols-outlined text-purple-400 text-5xl opacity-40">
             swords

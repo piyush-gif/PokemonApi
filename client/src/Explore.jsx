@@ -56,18 +56,26 @@ const Explore = () => {
   const [result, setResult] = useState(null);
   const [encountersRemaining, setEncountersRemaining] = useState(5);
   const [recentLogs, setRecentLogs] = useState([]);
+  const [inventory, setInventory] = useState(null);
   const { handleGet, handlePost, loading, error } = useFetch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchEncounterCount = async () => {
-      const data = await handleGet(
-        "http://localhost:8000/explore/encounter-status",
-      );
-      if (data) setEncountersRemaining(data.encounters_remaining);
-    };
     fetchEncounterCount();
+    fetchInventory();
   }, []);
+
+  const fetchEncounterCount = async () => {
+    const data = await handleGet(
+      "http://localhost:8000/explore/encounter-status",
+    );
+    if (data) setEncountersRemaining(data.encounters_remaining);
+  };
+
+  const fetchInventory = async () => {
+    const data = await handleGet("http://localhost:8000/shop/inventory");
+    if (data) setInventory(data);
+  };
 
   const handleRegionSelect = async (region) => {
     setSelectedRegion(region);
@@ -96,13 +104,15 @@ const Explore = () => {
     }
   };
 
-  const handleThrowPokeball = async () => {
+  const handleThrowPokeball = async (ballType = "pokeball") => {
     if (!encounter) return;
     const data = await handlePost("http://localhost:8000/explore/catch", {
       pokemon_id: encounter.id,
+      ball_type: ballType,
     });
     if (data) {
       setResult(data);
+      fetchInventory();
       setRecentLogs((prev) => [
         { name: encounter.name, result: data.result },
         ...prev.slice(0, 4),
@@ -114,6 +124,27 @@ const Explore = () => {
     setEncounter(null);
     setResult(null);
   };
+
+  const BALLS = [
+    {
+      type: "pokeball",
+      label: "Pokeball",
+      color: "bg-red-600 hover:bg-red-500",
+      count: inventory?.pokeballs || 0,
+    },
+    {
+      type: "great_ball",
+      label: "Great Ball",
+      color: "bg-blue-600 hover:bg-blue-500",
+      count: inventory?.great_balls || 0,
+    },
+    {
+      type: "ultra_ball",
+      label: "Ultra Ball",
+      color: "bg-yellow-500 hover:bg-yellow-400",
+      count: inventory?.ultra_balls || 0,
+    },
+  ];
 
   return (
     <div className="min-h-screen pt-6 pb-32 px-4 md:px-8 max-w-7xl mx-auto space-y-12">
@@ -131,22 +162,51 @@ const Explore = () => {
             Venture into the wild and catch pokemon
           </p>
         </div>
-        <div className="bg-[#1e1e2d] px-6 py-4 rounded-xl border border-[#474754]/20 flex items-center gap-4 shadow-xl">
-          <div className="flex flex-col items-end">
-            <span className="text-[10px] font-label font-extrabold uppercase tracking-[0.2em] text-[#aba9b9]">
-              Encounters Remaining
-            </span>
-            <span className="text-2xl font-headline font-bold text-red-400 tracking-tighter">
-              {encountersRemaining} / 5
-            </span>
-          </div>
-          <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-red-400">
-            <span
-              className="material-symbols-outlined"
-              style={{ fontVariationSettings: "'FILL' 1" }}
-            >
-              capture
-            </span>
+        <div className="flex gap-4">
+          {/* Inventory quick view */}
+          {inventory && (
+            <div className="bg-[#1e1e2d] px-4 py-3 rounded-xl border border-[#474754]/20 flex items-center gap-3 shadow-xl">
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-label uppercase tracking-widest text-[#aba9b9]">
+                  Balls
+                </span>
+                <span className="text-white font-headline font-bold">
+                  {inventory.pokeballs +
+                    inventory.great_balls +
+                    inventory.ultra_balls}
+                </span>
+              </div>
+              <div className="w-px h-8 bg-[#474754]/30" />
+              <div className="flex flex-col items-center">
+                <span className="text-[10px] font-label uppercase tracking-widest text-[#aba9b9]">
+                  Potions
+                </span>
+                <span className="text-white font-headline font-bold">
+                  {inventory.potions +
+                    inventory.super_potions +
+                    inventory.max_potions}
+                </span>
+              </div>
+            </div>
+          )}
+          {/* Encounters */}
+          <div className="bg-[#1e1e2d] px-6 py-4 rounded-xl border border-[#474754]/20 flex items-center gap-4 shadow-xl">
+            <div className="flex flex-col items-end">
+              <span className="text-[10px] font-label font-extrabold uppercase tracking-[0.2em] text-[#aba9b9]">
+                Encounters Remaining
+              </span>
+              <span className="text-2xl font-headline font-bold text-red-400 tracking-tighter">
+                {encountersRemaining} / 5
+              </span>
+            </div>
+            <div className="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-red-400">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
+                capture
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -196,11 +256,13 @@ const Explore = () => {
           );
         })}
       </section>
+
       {selectedRegion && error && (
         <div className="bg-red-500/10 border border-red-500/30 rounded-xl px-6 py-4 text-red-400 font-body text-sm">
           {error}
         </div>
       )}
+
       {/* Route Selector */}
       {selectedRegion && (
         <section className="bg-[#181826] p-8 rounded-3xl flex flex-col md:flex-row items-center gap-8 shadow-2xl">
@@ -305,24 +367,35 @@ const Explore = () => {
               />
             </div>
 
-            {/* Buttons */}
-            <div className="mt-12 flex flex-col md:flex-row gap-4 items-center justify-center">
-              <button
-                onClick={handleThrowPokeball}
-                disabled={loading}
-                className="group w-full md:w-auto px-12 py-6 bg-red-500 text-white rounded-full font-headline font-black uppercase tracking-[0.2em] shadow-[0_15px_40px_rgba(255,141,140,0.4)] hover:shadow-[0_20px_50px_rgba(255,141,140,0.6)] hover:-translate-y-1 active:translate-y-1 active:scale-95 transition-all flex items-center justify-center gap-4 disabled:opacity-50"
-              >
-                <span
-                  className="material-symbols-outlined text-3xl group-hover:rotate-180 transition-transform duration-500"
-                  style={{ fontVariationSettings: "'FILL' 1" }}
-                >
-                  capture
-                </span>
-                {loading ? "Throwing..." : "Throw Pokeball"}
-              </button>
+            {/* Ball Selector */}
+            <div className="mt-12 flex flex-col items-center gap-4">
+              <p className="text-[#aba9b9] font-label text-xs uppercase tracking-widest">
+                Choose a ball
+              </p>
+              <div className="flex gap-3 flex-wrap justify-center">
+                {BALLS.map((ball) => (
+                  <button
+                    key={ball.type}
+                    onClick={() => handleThrowPokeball(ball.type)}
+                    disabled={loading || ball.count <= 0}
+                    className={`px-6 py-4 ${ball.color} text-white rounded-full font-headline font-black uppercase tracking-wider transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex flex-col items-center gap-1 shadow-lg`}
+                  >
+                    <span
+                      className="material-symbols-outlined text-2xl"
+                      style={{ fontVariationSettings: "'FILL' 1" }}
+                    >
+                      capture
+                    </span>
+                    <span className="text-sm">{ball.label}</span>
+                    <span className="text-xs opacity-70">
+                      {ball.count} left
+                    </span>
+                  </button>
+                ))}
+              </div>
               <button
                 onClick={handleFindAnother}
-                className="w-full md:w-auto px-10 py-5 bg-[#242434] text-[#aba9b9] rounded-full font-headline font-bold uppercase tracking-widest hover:bg-[#2b2a3c] hover:text-white active:scale-95 transition-all"
+                className="px-10 py-4 bg-[#242434] text-[#aba9b9] rounded-full font-headline font-bold uppercase tracking-widest hover:bg-[#2b2a3c] hover:text-white active:scale-95 transition-all mt-2"
               >
                 Run Away
               </button>
@@ -368,7 +441,6 @@ const Explore = () => {
             </h3>
             <p className="text-[#aba9b9] font-body">{result.message}</p>
           </div>
-
           <button
             onClick={handleFindAnother}
             className="bg-red-600 text-white px-8 py-3 rounded-xl font-headline font-bold uppercase tracking-tight hover:bg-red-500 transition-all"
