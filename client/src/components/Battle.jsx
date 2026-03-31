@@ -147,11 +147,12 @@ const Battle = () => {
     setBattleLoading(false);
   };
 
-  const handlePotion = async () => {
+  const handlePotion = async (potionType = "potion") => {
     if (!battleState || battleLoading) return;
     setBattleLoading(true);
     const data = await handlePost("http://localhost:8000/battle/move", {
       action: "potion",
+      potion_type: potionType,
     });
     if (data) {
       setBattleState(data);
@@ -636,10 +637,12 @@ const Battle = () => {
           <BattleBag
             playerTeam={battleState.player_team}
             activeIndex={battleState.active_player_index}
-            potionsUsed={battleState.potions_used}
+            potions={battleState.potions}
+            superPotions={battleState.super_potions}
+            maxPotions={battleState.max_potions}
             onSwitch={handleSwitch}
-            onPotion={async () => {
-              await handlePotion();
+            onPotion={async (potionType) => {
+              await handlePotion(potionType);
               setShowBag(false);
             }}
             onClose={() => setShowBag(false)}
